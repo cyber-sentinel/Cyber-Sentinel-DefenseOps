@@ -14,10 +14,10 @@
 ## Next: DefenseOps v0.1.0
 
 - finish release-candidate verification;
-- improve native validation coverage where practical;
+- add native Snort 3 and Zeek validation where practical;
 - formalize compatibility/version evidence;
-- refine repository presentation;
-- publish first stable release when quality gates are satisfied.
+- document reproducible lab-validation criteria;
+- publish first stable release only when the defined quality gates are satisfied.
 
 ## Strategic Product: Cyber-Sentinel-Atlas
 
@@ -52,7 +52,7 @@ Atlas is the planned signature project.
 ## Sequence
 
 ```text
-DefenseOps rename/reposition
+DefenseOps identity stabilized
         ↓
 DefenseOps v0.1.0 hardening
         ↓
