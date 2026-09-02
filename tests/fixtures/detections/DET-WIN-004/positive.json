@@ -1,0 +1,16 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\rundll32.exe",
+    "CommandLine": "rundll32.exe javascript:example",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\analyst",
+    "Computer": "LAB-01"
+  },
+  {
+    "Image": "C:\\Windows\\System32\\rundll32.exe",
+    "CommandLine": "rundll32.exe https://example.invalid/a.dll,Entry",
+    "ParentImage": "C:\\Windows\\explorer.exe",
+    "User": "LAB\\analyst",
+    "Computer": "LAB-02"
+  }
+]

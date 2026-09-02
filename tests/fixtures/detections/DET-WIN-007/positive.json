@@ -1,0 +1,16 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\schtasks.exe",
+    "CommandLine": "schtasks.exe /create /tn LabTask /tr \"powershell.exe Get-Date\" /sc once /st 23:59",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\admin",
+    "Computer": "LAB-01"
+  },
+  {
+    "Image": "C:\\Windows\\System32\\schtasks.exe",
+    "CommandLine": "schtasks.exe /create /tn TempTask /tr \"C:\\Users\\Public\\Temp\\tool.exe\" /sc daily /st 10:00",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\admin",
+    "Computer": "LAB-02"
+  }
+]

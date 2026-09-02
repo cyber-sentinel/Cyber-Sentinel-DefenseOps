@@ -1,0 +1,9 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\wbem\\wmic.exe",
+    "CommandLine": "wmic.exe os get Caption,Version",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\admin",
+    "Computer": "LAB-01"
+  }
+]

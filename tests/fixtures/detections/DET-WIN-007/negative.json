@@ -1,0 +1,9 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\schtasks.exe",
+    "CommandLine": "schtasks.exe /query /fo list",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\admin",
+    "Computer": "LAB-01"
+  }
+]

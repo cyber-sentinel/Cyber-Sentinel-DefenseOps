@@ -1,0 +1,9 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\mshta.exe",
+    "CommandLine": "mshta.exe C:\\Program Files\\LegacyApp\\approved.hta",
+    "ParentImage": "C:\\Program Files\\LegacyApp\\legacy.exe",
+    "User": "LAB\\user",
+    "Computer": "LAB-03"
+  }
+]

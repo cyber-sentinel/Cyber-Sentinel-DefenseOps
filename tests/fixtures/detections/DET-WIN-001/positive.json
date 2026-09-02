@@ -1,0 +1,16 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "CommandLine": "powershell.exe -EncodedCommand AAAA",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\analyst",
+    "Computer": "LAB-01"
+  },
+  {
+    "Image": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+    "CommandLine": "pwsh.exe -enc BBBB",
+    "ParentImage": "C:\\Windows\\explorer.exe",
+    "User": "LAB\\analyst",
+    "Computer": "LAB-02"
+  }
+]

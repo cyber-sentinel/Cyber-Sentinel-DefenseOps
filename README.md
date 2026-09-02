@@ -2,13 +2,38 @@
 
 **Flagship Cyber Defense Engineering Lab**
 
-[Cyber-Sentinel Profile](https://github.com/cyber-sentinel) • `Bootstrap v0.1`
+[![Repository Hygiene](https://github.com/cyber-sentinel/Cyber-Sentinel-Forge/actions/workflows/repository-hygiene.yml/badge.svg)](https://github.com/cyber-sentinel/Cyber-Sentinel-Forge/actions/workflows/repository-hygiene.yml)
+![Release Candidate](https://img.shields.io/badge/release-v0.1.0--rc.1-informational)
+![ATT&CK Mapped](https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-informational)
+![Multi-Engine](https://img.shields.io/badge/detection-multi--engine-informational)
+
+[Cyber-Sentinel Profile](https://github.com/cyber-sentinel)
 
 Cyber-Sentinel-Forge is a practical cyber defense engineering repository focused on building reusable, testable, and production-aware defensive security content.
+
+> **Product direction:** this repository is being hardened for the planned **Cyber-Sentinel DefenseOps** identity. The GitHub repository slug will be changed separately because repository-rename metadata is not exposed by the current connector.
 
 ## Mission
 
 Turn cyber defense knowledge into engineering artifacts that can be reviewed, tested, measured, and operationalized.
+
+## Current Release Candidate
+
+`v0.1.0-rc.1`
+
+The release candidate introduces a formal quality model:
+
+- native Sigma validation with Sigma CLI;
+- native YARA compilation with `yarac`;
+- native Suricata configuration/rule validation;
+- positive and negative synthetic detection fixtures;
+- explicit engine-validation maturity levels;
+- CI enforcement for detection and hunting packs.
+
+See:
+
+- [Quality Model](./docs/quality-model.md)
+- [Engine Validation Matrix](./docs/engine-validation-matrix.md)
 
 ## Core Domains
 
@@ -43,7 +68,7 @@ Every substantive artifact should document:
 3. Required telemetry / prerequisites
 4. Engine, platform, and language
 5. Detection, hunt, deception, or response logic
-6. Validation procedure
+6. Validation level and evidence
 7. Expected false positives / limitations
 8. Production considerations
 9. Rollback or disable procedure

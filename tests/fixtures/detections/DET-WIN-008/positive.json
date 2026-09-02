@@ -1,0 +1,16 @@
+[
+  {
+    "Image": "C:\\Tools\\PsExec64.exe",
+    "CommandLine": "PsExec64.exe \\\\LAB-02 cmd.exe",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\admin",
+    "Computer": "LAB-01"
+  },
+  {
+    "Image": "C:\\Windows\\PSEXESVC.exe",
+    "CommandLine": "PSEXESVC.exe",
+    "ParentImage": "C:\\Windows\\System32\\services.exe",
+    "User": "SYSTEM",
+    "Computer": "LAB-02"
+  }
+]
