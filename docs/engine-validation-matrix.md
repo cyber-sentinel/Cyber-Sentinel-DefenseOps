@@ -7,7 +7,7 @@ This matrix describes **validation capability**, not marketing coverage.
 | Sigma | Sigma CLI / pySigma checks | Q2 | Backend field mappings still require deployment-specific validation |
 | YARA | `yarac` compilation | Q2 | Artifact quality still requires representative samples |
 | Suricata | `suricata -T` with repository rules | Q2 | Network visibility and protocol configuration vary |
-| Snort 3 | Version-pinned native `snort -T` CI | Q1 → Q2 pending final pass | Q2 applies only after the pinned runtime accepts the repository rules |
+| Snort 3 | Version-pinned native `snort -T` CI with Snort 3.12.2.0 | Q2 | Revalidate on engine/version changes; network visibility and DAQ configuration remain deployment-specific |
 | Zeek | Native script load with Zeek 8.0.9 | Q2 | Validate again when changing Zeek major/minor versions |
 | Splunk SPL | Static/reviewed query | Q1 | Index, sourcetype, CIM, and field names vary |
 | Microsoft Kusto Query Language (KQL) | Static/reviewed query | Q1 | Defender/Sentinel table and tenant schema validation required |
