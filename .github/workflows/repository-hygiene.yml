@@ -1,0 +1,49 @@
+name: Repository Hygiene
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for sensitive filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find . -type f \( -name "*.pem" -o -name "*.key" -o -name "*.pfx" -o -name ".env" \) | grep -q .; then
+            echo "Potential secret-bearing file detected."
+            exit 1
+          fi
+
+      - name: Validate text files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          bad = []
+          for p in Path('.').rglob('*'):
+              if p.is_file() and '.git' not in p.parts and p.suffix.lower() in {'.md','.yaml','.yml','.json','.py','.ps1','.sh'}:
+                  try:
+                      t = p.read_text(encoding='utf-8')
+                  except UnicodeDecodeError:
+                      bad.append(f"{p}: not UTF-8")
+                      continue
+                  if '\r\n' in t:
+                      pass
+                  for i, line in enumerate(t.splitlines(), 1):
+                      if line.rstrip() != line:
+                          bad.append(f"{p}:{i}: trailing whitespace")
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit(1)
+          print("Repository hygiene checks passed.")
+          PY

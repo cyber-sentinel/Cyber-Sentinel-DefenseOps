@@ -1,0 +1,41 @@
+id: DET-0000
+title: Example Detection Title
+status: experimental
+domain: detection-engineering
+platform:
+  - windows
+attack:
+  techniques: []
+data_sources: []
+severity: medium
+confidence: medium
+
+description: >
+  Describe the behavior being detected and why it matters.
+
+logic:
+  language: sigma
+  query: |
+    # Add detection logic here.
+
+validation:
+  lab_required: true
+  procedure:
+    - Generate synthetic or authorized test telemetry.
+    - Confirm expected event fields are present.
+    - Execute the detection logic.
+    - Record expected and actual result.
+
+false_positives: []
+
+production:
+  expected_volume: unknown
+  performance_risk: unknown
+  tuning_required: true
+
+rollback:
+  procedure:
+    - Disable the detection rule.
+    - Restore the previous known-good version.
+
+references: []
