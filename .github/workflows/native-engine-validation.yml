@@ -64,6 +64,7 @@ jobs:
             libdumbnet-dev \
             libhwloc-dev \
             libluajit-5.1-dev \
+            liblzma-dev \
             libpcap-dev \
             libpcre2-dev \
             libssl-dev \
