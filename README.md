@@ -2,6 +2,8 @@
 
 **Flagship Cyber Defense Engineering Lab**
 
+[Cyber-Sentinel Profile](https://github.com/cyber-sentinel) • `Bootstrap v0.1`
+
 Cyber-Sentinel-Forge is a practical cyber defense engineering repository focused on building reusable, testable, and production-aware defensive security content.
 
 ## Mission
