@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine)
+| where Proc == "rundll32.exe" and Cmd has_any ("javascript:", "vbscript:", "http://", "https://")
+| project Timestamp, DeviceId, DeviceName, ReportId, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine

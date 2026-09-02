@@ -1,8 +1,8 @@
-# Windows PowerShell & LOLBins Detection Pack v0.2
+# Windows PowerShell & LOLBins Detection Pack v0.3
 
 This pack provides multi-engine defensive detections for high-signal Windows command execution and LOLBin abuse patterns.
 
-## Coverage
+## Use Cases
 
 | ID | Use Case | ATT&CK |
 |---|---|---|
@@ -10,58 +10,65 @@ This pack provides multi-engine defensive detections for high-signal Windows com
 | DET-WIN-002 | PowerShell Network Download Pattern | T1059.001 |
 | DET-WIN-003 | Mshta Remote or Script-Protocol Execution | T1218.005 |
 | DET-WIN-004 | Rundll32 Suspicious Script or Remote Execution | T1218.011 |
-| DET-WIN-005 | Regsvr32 Scriptlet / Scrobj Abuse | T1218.010 |
+| DET-WIN-005 | Regsvr32 Scriptlet or Scrobj Abuse | T1218.010 |
 | DET-WIN-006 | WMIC Remote Process Creation | T1047 |
 | DET-WIN-007 | Suspicious Scheduled Task Creation | T1053.005 |
-| DET-WIN-008 | PsExec / PSEXESVC Execution | T1569.002 |
+| DET-WIN-008 | PsExec or PSEXESVC Execution | T1569.002 |
 
-## Detection Engines
+## Engine Layout
 
-The pack intentionally separates query languages that are often conflated:
+### Portable / SIEM / Endpoint
 
-- `sigma/` — portable Sigma process-creation rules
-- `splunk/` — Splunk SPL
-- `kql/` — Microsoft Kusto Query Language for Microsoft Defender XDR / Sentinel-style telemetry
-- `elastic-kql/` — Kibana Query Language against ECS process fields
-- `elastic-eql/` — Elastic Event Query Language against ECS process events
-- `elastic-query-dsl/` — Elasticsearch Query DSL JSON
-- `yara/` — file or memory artifact detection only where YARA is technically meaningful
-- `suricata/` — network adjunct detections only where an HTTP/network observable exists
+- `sigma/` — Sigma YAML
+- `splunk-spl/` — Splunk Search Processing Language (SPL)
+- `microsoft-kql/` — Microsoft Kusto Query Language (KQL), targeting Defender XDR `DeviceProcessEvents`
+- `microsoft-defender-custom-detection/` — Defender XDR custom-detection metadata referencing Microsoft KQL
+- `elastic-kql/` — Elastic Kibana Query Language (KQL)
+- `elastic-eql/` — Elastic Event Query Language (EQL)
+- `elastic-esql/` — Elastic Elasticsearch Query Language (ES|QL)
+- `elastic-query-dsl/` — Elasticsearch Query DSL
+- `opensearch-query-dsl/` — OpenSearch Query DSL
+- `crowdstrike-logscale-cql/` — CrowdStrike Falcon LogScale CQL
+- `sentinelone-star/` — SentinelOne Singularity PowerQuery templates suitable for STAR promotion after validation
+- `wazuh-xml/` — Wazuh XML custom rules
+- `google-secops-yara-l/` — Google Security Operations YARA-L 2.0
 
-See [engine-coverage.md](./engine-coverage.md) for the per-use-case matrix.
+### Artifact / Network / Runtime
+
+- `yara/` — file/memory adjunct rules
+- `suricata/` — network adjunct rules
+- `snort3/` — Snort 3 network adjunct rules
+- `zeek/` — Zeek network notices/scripts
+- `falco/` — registered engine; N/A for this Windows process pack, used in Linux/container packs
+
+See:
+
+- [Engine Coverage](./engine-coverage.md)
+- [Global Engine Registry](../../../docs/detection-engine-registry.md)
+- [Naming Convention](../../../docs/detection-naming-convention.md)
 
 ## Telemetry
 
-Recommended endpoint telemetry sources:
+Recommended endpoint telemetry:
 
-- Sysmon Event ID 1 (Process Create)
-- Windows Security Event ID 4688 with command-line auditing enabled
+- Sysmon Event ID 1
+- Windows Security Event ID 4688 with command-line auditing
 - Microsoft Defender XDR `DeviceProcessEvents`
-- Elastic Endpoint / ECS-compatible process telemetry
-- Other EDR/XDR process telemetry with full command line
+- Elastic Endpoint / ECS-compatible process events
+- CrowdStrike Falcon process telemetry (`ProcessRollup2`)
+- SentinelOne Singularity process-creation telemetry
+- Wazuh-decoded Sysmon process telemetry
 
-Network adjunct rules require:
+Network adjunct engines require network visibility and do not replace endpoint telemetry.
 
-- Suricata HTTP visibility
-- plaintext HTTP or an architecture that provides decrypted HTTP visibility
-- appropriate `HOME_NET` / `EXTERNAL_NET` definitions
+## Production Standard
 
-## Validation Model
+Before promotion from `experimental` to a production candidate:
 
-Rules are intentionally marked `experimental` until tuned against a target environment.
-
-Before production deployment:
-
-1. Validate required fields and field mappings.
-2. Replay synthetic or sanitized telemetry.
-3. Measure baseline frequency for at least 7–14 days where practical.
-4. Identify administrative tooling and software-distribution exceptions.
-5. Add narrow environment-specific filters.
-6. Validate alert routing and response ownership.
-7. Keep a rollback path to disable or restore the previous rule.
-
-See [validation.md](./validation.md).
-
-## Production Warning
-
-Do not copy rules directly into production without field normalization and baseline tuning. SPL index/sourcetype conventions, Elastic ECS mappings, Microsoft table availability, and Suricata visibility vary by deployment.
+1. Validate syntax in the target engine.
+2. Validate field/schema mappings in the actual tenant.
+3. Replay synthetic or sanitized positive and negative telemetry.
+4. Baseline event volume for 7–14 days where practical.
+5. Document false positives and evidence-based exclusions.
+6. Define alert ownership and response action.
+7. Test rollback/disable procedures.

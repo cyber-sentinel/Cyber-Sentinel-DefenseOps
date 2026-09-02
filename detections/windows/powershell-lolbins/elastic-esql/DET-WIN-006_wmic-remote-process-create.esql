@@ -1,0 +1,6 @@
+// Elastic ES|QL — ECS-compatible Elastic Endpoint process data.
+// Adjust the source data stream pattern for the target deployment.
+FROM logs-endpoint.events.process-*
+| WHERE process.name == "wmic.exe" AND process.command_line LIKE "*/node:*" AND process.command_line LIKE "*process*" AND process.command_line LIKE "*call*" AND process.command_line LIKE "*create*"
+| KEEP @timestamp, host.name, user.name, process.name, process.command_line, process.parent.name, process.parent.command_line
+| SORT @timestamp DESC

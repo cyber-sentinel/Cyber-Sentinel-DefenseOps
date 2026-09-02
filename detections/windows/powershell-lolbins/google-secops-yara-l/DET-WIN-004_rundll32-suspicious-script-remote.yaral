@@ -1,0 +1,15 @@
+rule cs_det_win_004_rundll32_suspicious_script_remote {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Rundll32 Suspicious Script or Remote Execution"
+    severity = "HIGH"
+    mitre_attack = "T1218.011"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\brundll32(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)(?:javascript:|vbscript:|https?://)`)
+
+  condition:
+    $e
+}

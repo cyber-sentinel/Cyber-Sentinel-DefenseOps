@@ -1,0 +1,16 @@
+rule cs_det_win_007_scheduled_task_suspicious_action {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Suspicious Scheduled Task Creation"
+    severity = "MEDIUM"
+    mitre_attack = "T1053.005"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\bschtasks(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)/create`)
+    re.regex($e.principal.process.command_line, `(?i)(?:powershell|pwsh|cmd\s+/c|mshta|rundll32|regsvr32|\\AppData\\|\\Temp\\)`)
+
+  condition:
+    $e
+}

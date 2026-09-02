@@ -1,0 +1,17 @@
+{
+  "query": {
+    "query_string": {
+      "query": "process.name.keyword:schtasks.exe AND process.command_line:*/create* AND process.command_line:(*powershell* OR *pwsh* OR *cmd\\\\ /c* OR *mshta* OR *rundll32* OR *regsvr32* OR *AppData* OR *Temp*)",
+      "analyze_wildcard": true
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

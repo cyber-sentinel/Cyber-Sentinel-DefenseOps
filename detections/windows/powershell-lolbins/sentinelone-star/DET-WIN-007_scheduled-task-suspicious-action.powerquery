@@ -1,0 +1,4 @@
+// SentinelOne Singularity Data Lake PowerQuery.
+// Validate field availability in the target tenant before promoting to a STAR custom rule.
+dataSource.name='SentinelOne' AND endpoint.os='windows' AND event.type='Process Creation' AND tgt.process.name='schtasks.exe' AND tgt.process.cmdline contains:anycase '/create' AND tgt.process.cmdline contains:anycase ('powershell','pwsh','cmd /c','mshta','rundll32','regsvr32','\\AppData\\','\\Temp\\')
+| columns event.time, endpoint.name, src.process.user, tgt.process.name, tgt.process.cmdline, src.process.name, src.process.cmdline, src.process.parent.name

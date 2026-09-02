@@ -1,0 +1,16 @@
+rule cs_det_win_005_regsvr32_scriptlet_scrobj {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Regsvr32 Scriptlet or Scrobj Abuse"
+    severity = "HIGH"
+    mitre_attack = "T1218.010"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\bregsvr32(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)scrobj\.dll`)
+    re.regex($e.principal.process.command_line, `(?i)(?:/i:|-i:)`)
+
+  condition:
+    $e
+}

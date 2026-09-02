@@ -1,0 +1,73 @@
+<group name="cyber_sentinel,windows,sysmon,">
+  <rule id="110001" level="10">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\(powershell|pwsh)\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(\s-(enc|encodedcommand|e)\s|\s/enc\s)</field>
+    <description>Cyber-Sentinel DET-WIN-001: PowerShell Encoded Command</description>
+    <mitre><id>T1059.001</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110002" level="7">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\(powershell|pwsh)\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(invoke-webrequest|downloadstring|downloadfile|webclient|start-bitstransfer)</field>
+    <description>Cyber-Sentinel DET-WIN-002: PowerShell Network Download Pattern</description>
+    <mitre><id>T1059.001</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110003" level="10">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\mshta\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(https?://|javascript:|vbscript:)</field>
+    <description>Cyber-Sentinel DET-WIN-003: Mshta Remote or Script-Protocol Execution</description>
+    <mitre><id>T1218.005</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110004" level="10">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\rundll32\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(javascript:|vbscript:|https?://)</field>
+    <description>Cyber-Sentinel DET-WIN-004: Rundll32 Suspicious Script or Remote Execution</description>
+    <mitre><id>T1218.011</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110005" level="10">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\regsvr32\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)scrobj\.dll.*(\/i:|-i:)|(\/i:|-i:).*scrobj\.dll</field>
+    <description>Cyber-Sentinel DET-WIN-005: Regsvr32 Scriptlet or Scrobj Abuse</description>
+    <mitre><id>T1218.010</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110006" level="10">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\wmic\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\/node:.*process.*call.*create</field>
+    <description>Cyber-Sentinel DET-WIN-006: WMIC Remote Process Creation</description>
+    <mitre><id>T1047</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110007" level="7">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\schtasks\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\/create.*(powershell|pwsh|cmd\s+\/c|mshta|rundll32|regsvr32|\\AppData\\|\\Temp\\)</field>
+    <description>Cyber-Sentinel DET-WIN-007: Suspicious Scheduled Task Creation</description>
+    <mitre><id>T1053.005</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+  <rule id="110008" level="7">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\(psexec|psexec64|psexesvc)\.exe$</field>
+    <description>Cyber-Sentinel DET-WIN-008: PsExec or PSEXESVC Execution</description>
+    <mitre><id>T1569.002</id></mitre>
+    <group>cyber_sentinel,detection_engineering,</group>
+  </rule>
+
+</group>

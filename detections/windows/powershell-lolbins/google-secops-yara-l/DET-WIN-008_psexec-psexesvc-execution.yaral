@@ -1,0 +1,14 @@
+rule cs_det_win_008_psexec_psexesvc_execution {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "PsExec or PSEXESVC Execution"
+    severity = "MEDIUM"
+    mitre_attack = "T1569.002"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\b(?:psexec|psexec64|psexesvc)(?:\.exe)?\b`)
+
+  condition:
+    $e
+}

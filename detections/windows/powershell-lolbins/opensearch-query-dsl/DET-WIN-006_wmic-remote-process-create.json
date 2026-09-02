@@ -1,0 +1,17 @@
+{
+  "query": {
+    "query_string": {
+      "query": "process.name.keyword:wmic.exe AND process.command_line:*/node\\\\:* AND process.command_line:*process* AND process.command_line:*call* AND process.command_line:*create*",
+      "analyze_wildcard": true
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

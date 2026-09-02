@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| extend Proc=tolower(FileName)
-| where Proc in ("psexec.exe", "psexec64.exe", "psexesvc.exe")
-| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine

@@ -1,30 +1,33 @@
-# Detection Engine Coverage Matrix
+# Detection Engine Coverage Matrix — v0.3
 
-Legend:
+## Endpoint / SIEM / Platform-Native Engines
 
-- **Native** — the engine observes the primary behavior directly.
-- **Adjunct** — useful supporting evidence, but not equivalent to the endpoint process detection.
-- **N/A** — the engine is not a technically appropriate representation of that observable.
+| Engine | Current Pack Status |
+|---|---|
+| Sigma | Native — 8/8 |
+| Splunk SPL | Native — 8/8 |
+| Microsoft Kusto Query Language (KQL) | Native — 8/8 |
+| Microsoft Defender XDR Custom Detection | Native wrapper over Microsoft KQL — 8/8 metadata |
+| Elastic Kibana Query Language (KQL) | Native — 8/8 |
+| Elastic Event Query Language (EQL) | Native — 8/8 |
+| Elastic ES|QL | Native — 8/8 |
+| Elasticsearch Query DSL | Native — 8/8 |
+| OpenSearch Query DSL | Native, mapping-dependent — 8/8 |
+| CrowdStrike Falcon LogScale CQL | Native, Falcon schema-dependent — 8/8 |
+| SentinelOne STAR / Singularity PowerQuery | Native template, tenant-schema validation required — 8/8 |
+| Wazuh XML Custom Rules | Native for Sysmon Event ID 1 — 8/8 |
+| Google SecOps YARA-L 2.0 | Native UDM process-event rules — 8/8 |
 
-| ID | Sigma | Splunk SPL | Microsoft KQL | Elastic KQL | Elastic EQL | Elastic Query DSL | YARA | Suricata |
-|---|---|---|---|---|---|---|---|---|
-| DET-WIN-001 PowerShell Encoded Command | Native | Native | Native | Native | Native | Native | Adjunct | N/A |
-| DET-WIN-002 PowerShell Network Download | Native | Native | Native | Native | Native | Native | Adjunct | Adjunct |
-| DET-WIN-003 Mshta Remote/Script Protocol | Native | Native | Native | Native | Native | Native | Adjunct | Adjunct |
-| DET-WIN-004 Rundll32 Suspicious Script/Remote | Native | Native | Native | Native | Native | Native | N/A | N/A |
-| DET-WIN-005 Regsvr32 Scriptlet/Scrobj | Native | Native | Native | Native | Native | Native | Adjunct | Adjunct |
-| DET-WIN-006 WMIC Remote Process Creation | Native | Native | Native | Native | Native | Native | N/A | N/A |
-| DET-WIN-007 Suspicious Scheduled Task Creation | Native | Native | Native | Native | Native | Native | N/A | N/A |
-| DET-WIN-008 PsExec/PSEXESVC Execution | Native | Native | Native | Native | Native | Native | N/A | N/A |
+## Artifact / Network / Runtime Engines
 
-## Why YARA Is Not Universal
+| Engine | Status | Rationale |
+|---|---|---|
+| YARA | Adjunct | Detects supporting files/memory artifacts, not Windows command-line telemetry itself |
+| Suricata | Adjunct | HTTP/network visibility for selected retrieval patterns |
+| Snort 3 | Adjunct | HTTP/network visibility for selected retrieval patterns |
+| Zeek | Adjunct | HTTP behavioral notices for selected retrieval patterns |
+| Falco | N/A in this pack | Windows process pack; Falco belongs in Linux/container/runtime packs |
 
-YARA scans files or process memory. It does not natively represent Windows process command-line telemetry, so a YARA rule for every LOLBin would create misleading coverage.
+## Design Rule
 
-The YARA rules in this pack detect supporting script/file artifacts such as PowerShell retrieval primitives, HTA content, or scriptlet/scrobj content.
-
-## Why Suricata Is Not Universal
-
-Suricata observes network traffic. Local process creation, service execution, WMI, and scheduled-task creation are endpoint behaviors.
-
-The Suricata rules in this pack therefore provide only supporting HTTP observables for PowerShell, HTA, and scriptlet retrieval patterns.
+Coverage count is never prioritized over technical correctness. An engine is omitted or marked N/A when it cannot observe the behavior faithfully.

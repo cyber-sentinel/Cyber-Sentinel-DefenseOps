@@ -1,0 +1,32 @@
+# Snort 3 network adjunct detections.
+// Requires HTTP visibility; these do not replace endpoint process detections.
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (
+    msg:"CS DET-WIN-002 Potential PowerShell HTTP User-Agent";
+    flow:to_server,established;
+    http_header:field user-agent;
+    content:"PowerShell",nocase;
+    classtype:policy-violation;
+    sid:9101001;
+    rev:1;
+)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (
+    msg:"CS DET-WIN-003 HTA Retrieval Over HTTP";
+    flow:to_server,established;
+    http_uri:path;
+    content:".hta",nocase;
+    classtype:policy-violation;
+    sid:9101002;
+    rev:1;
+)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (
+    msg:"CS DET-WIN-005 Scriptlet SCT Retrieval Over HTTP";
+    flow:to_server,established;
+    http_uri:path;
+    content:".sct",nocase;
+    classtype:policy-violation;
+    sid:9101003;
+    rev:1;
+)

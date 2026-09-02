@@ -1,0 +1,17 @@
+{
+  "query": {
+    "query_string": {
+      "query": "(process.name.keyword:(powershell.exe OR pwsh.exe)) AND process.command_line:(*\\\\ -enc\\\\ * OR *\\\\ -encodedcommand\\\\ * OR *\\\\ /enc\\\\ * OR *\\\\ -e\\\\ *)",
+      "analyze_wildcard": true
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

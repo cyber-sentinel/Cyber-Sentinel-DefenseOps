@@ -1,6 +1,0 @@
-DeviceProcessEvents
-| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine)
-| where Proc == "regsvr32.exe"
-| where Cmd contains "scrobj.dll"
-| where Cmd contains "/i:" or Cmd contains "-i:"
-| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine

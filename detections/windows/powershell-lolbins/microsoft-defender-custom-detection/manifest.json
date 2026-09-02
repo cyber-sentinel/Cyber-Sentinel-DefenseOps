@@ -1,0 +1,142 @@
+{
+  "format": "cyber-sentinel-defender-custom-detection-manifest/v1",
+  "note": "Documentation manifest; not a direct Microsoft API import payload. Query files are Microsoft Kusto Query Language (KQL).",
+  "detections": [
+    {
+      "id": "DET-WIN-001",
+      "name": "PowerShell Encoded Command",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-001_powershell-encoded-command.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "High",
+      "mitre_attack": [
+        "T1059.001"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-002",
+      "name": "PowerShell Network Download Pattern",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-002_powershell-network-download.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "Medium",
+      "mitre_attack": [
+        "T1059.001"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-003",
+      "name": "Mshta Remote or Script-Protocol Execution",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-003_mshta-remote-script-protocol.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "High",
+      "mitre_attack": [
+        "T1218.005"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-004",
+      "name": "Rundll32 Suspicious Script or Remote Execution",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-004_rundll32-suspicious-script-remote.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "High",
+      "mitre_attack": [
+        "T1218.011"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-005",
+      "name": "Regsvr32 Scriptlet or Scrobj Abuse",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-005_regsvr32-scriptlet-scrobj.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "High",
+      "mitre_attack": [
+        "T1218.010"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-006",
+      "name": "WMIC Remote Process Creation",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-006_wmic-remote-process-create.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "High",
+      "mitre_attack": [
+        "T1047"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-007",
+      "name": "Suspicious Scheduled Task Creation",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-007_scheduled-task-suspicious-action.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "Medium",
+      "mitre_attack": [
+        "T1053.005"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    },
+    {
+      "id": "DET-WIN-008",
+      "name": "PsExec or PSEXESVC Execution",
+      "query_language": "Microsoft Kusto Query Language (KQL)",
+      "query_file": "../microsoft-kql/DET-WIN-008_psexec-psexesvc-execution.kql",
+      "source_table": "DeviceProcessEvents",
+      "severity": "Medium",
+      "mitre_attack": [
+        "T1569.002"
+      ],
+      "recommended_mode": "Alert-only during baseline; response actions require production approval",
+      "required_result_columns": [
+        "Timestamp",
+        "DeviceId",
+        "ReportId"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+rule cs_det_win_003_mshta_remote_script_protocol {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Mshta Remote or Script-Protocol Execution"
+    severity = "HIGH"
+    mitre_attack = "T1218.005"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\bmshta(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)(?:https?://|javascript:|vbscript:)`)
+
+  condition:
+    $e
+}

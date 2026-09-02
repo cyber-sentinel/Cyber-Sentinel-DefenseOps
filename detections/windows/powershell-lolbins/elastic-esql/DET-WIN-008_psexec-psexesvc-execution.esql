@@ -1,0 +1,6 @@
+// Elastic ES|QL — ECS-compatible Elastic Endpoint process data.
+// Adjust the source data stream pattern for the target deployment.
+FROM logs-endpoint.events.process-*
+| WHERE process.name IN ("psexec.exe", "psexec64.exe", "psexesvc.exe")
+| KEEP @timestamp, host.name, user.name, process.name, process.command_line, process.parent.name, process.parent.command_line
+| SORT @timestamp DESC

@@ -1,0 +1,15 @@
+rule cs_det_win_002_powershell_network_download {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "PowerShell Network Download Pattern"
+    severity = "MEDIUM"
+    mitre_attack = "T1059.001"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\b(?:powershell|pwsh)(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)(?:invoke-webrequest|downloadstring|downloadfile|webclient|start-bitstransfer)`)
+
+  condition:
+    $e
+}

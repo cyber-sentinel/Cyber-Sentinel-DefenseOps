@@ -1,0 +1,16 @@
+rule cs_det_win_006_wmic_remote_process_create {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "WMIC Remote Process Creation"
+    severity = "HIGH"
+    mitre_attack = "T1047"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\bwmic(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)/node:`)
+    re.regex($e.principal.process.command_line, `(?i)\bprocess\b.*\bcall\b.*\bcreate\b`)
+
+  condition:
+    $e
+}

@@ -20,35 +20,30 @@ Turn cyber defense knowledge into engineering artifacts that can be reviewed, te
 - AppSec & DevSecOps
 - AI Security & Automation
 
-## Repository Structure
+## Detection Engineering Standard
 
-```text
-Cyber-Sentinel-Forge/
-├── detections/          Detection engineering templates and content
-├── deception/           Deception patterns, decoy/lure designs, detection integration
-├── threat-hunting/      Hunt hypotheses, procedures, evidence and validation
-├── dfir/                Investigation templates and forensic references
-├── incident-response/   IR playbooks and response procedures
-├── automation/          Defensive automation patterns
-├── tools/               Defensive engineering utilities
-├── labs/                Reproducible defensive labs
-├── examples/            Reference examples
-└── docs/                Architecture and content standards
-```
+Cyber-Sentinel-Forge uses explicit engine/language names. Ambiguous labels such as **KQL** by itself are not used.
+
+See [Detection Engine & Language Registry](./docs/detection-engine-registry.md).
+
+## Detection Packs
+
+- [Windows PowerShell & LOLBins Detection Pack v0.3](./detections/windows/powershell-lolbins/) — multi-engine coverage across Sigma, Splunk SPL, Microsoft KQL, Microsoft Defender XDR Custom Detections, Elastic KQL/EQL/ES|QL/Query DSL, OpenSearch Query DSL, CrowdStrike Falcon LogScale CQL, SentinelOne STAR templates, Wazuh XML, Google SecOps YARA-L, YARA, Suricata, Snort 3, and Zeek where technically applicable.
 
 ## Engineering Standard
 
-Every substantive artifact should document, where applicable:
+Every substantive artifact should document:
 
 1. Objective and defensive use case
 2. Threat or ATT&CK context
 3. Required telemetry / prerequisites
-4. Detection, hunt, deception, or response logic
-5. Validation procedure
-6. Expected false positives / limitations
-7. Production considerations
-8. Rollback or disable procedure
-9. References and version history
+4. Engine, platform, and language
+5. Detection, hunt, deception, or response logic
+6. Validation procedure
+7. Expected false positives / limitations
+8. Production considerations
+9. Rollback or disable procedure
+10. References and version history
 
 ## Content Lifecycle
 
@@ -59,14 +54,6 @@ Every substantive artifact should document, where applicable:
 This repository is intended for authorized defensive security engineering, controlled laboratories, detection validation, incident response, and security research.
 
 Do not deploy untested content directly to production environments.
-
-## Detection Packs
-
-- [Windows PowerShell & LOLBins Detection Pack v0.2](./detections/windows/powershell-lolbins/) — Sigma, Splunk SPL, Microsoft KQL, Elastic KQL/EQL/Query DSL, plus YARA and Suricata where the observable type is technically appropriate.
-
-## Status
-
-Initial repository architecture is being established. Content will be added incrementally with emphasis on technical quality rather than repository volume.
 
 ---
 

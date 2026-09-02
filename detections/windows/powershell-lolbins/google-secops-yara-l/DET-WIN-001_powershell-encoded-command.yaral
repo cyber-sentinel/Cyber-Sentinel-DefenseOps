@@ -1,0 +1,15 @@
+rule cs_det_win_001_powershell_encoded_command {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "PowerShell Encoded Command"
+    severity = "HIGH"
+    mitre_attack = "T1059.001"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    re.regex($e.principal.process.command_line, `(?i)\b(?:powershell|pwsh)(?:\.exe)?\b`)
+    re.regex($e.principal.process.command_line, `(?i)(?:\s-(?:enc|encodedcommand|e)\s|\s/enc\s)`)
+
+  condition:
+    $e
+}

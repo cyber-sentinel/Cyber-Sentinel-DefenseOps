@@ -1,0 +1,17 @@
+{
+  "query": {
+    "query_string": {
+      "query": "process.name.keyword:rundll32.exe AND process.command_line:(*javascript\\\\:* OR *vbscript\\\\:* OR *http\\\\://* OR *https\\\\://*)",
+      "analyze_wildcard": true
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

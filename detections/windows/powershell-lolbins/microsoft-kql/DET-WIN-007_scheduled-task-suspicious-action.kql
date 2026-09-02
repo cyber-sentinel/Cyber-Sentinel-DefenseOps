@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine)
+| where Proc == "schtasks.exe" and Cmd contains "/create" and Cmd has_any ("powershell", "pwsh", "cmd /c", "mshta", "rundll32", "regsvr32", "\\appdata\\", "\\temp\\")
+| project Timestamp, DeviceId, DeviceName, ReportId, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine
