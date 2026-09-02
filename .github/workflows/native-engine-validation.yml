@@ -68,4 +68,4 @@ jobs:
             --entrypoint sh \
             -v "$PWD:/work:ro" \
             "$IMAGE" \
-            -lc 'set -e; DAQ="$(find / -type f -name "libdaq.so.3*" 2>/dev/null | head -n 1)"; test -n "$DAQ"; export LD_LIBRARY_PATH="$(dirname "$DAQ"):${LD_LIBRARY_PATH:-}"; CFG="$(find / -type f -name snort.lua 2>/dev/null | head -n 1)"; test -n "$CFG"; snort -T -c "$CFG" -R /work/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules'
+            -lc 'set -e; DAQ="$(find / -type f -name "libdaq.so.3*" 2>/dev/null | head -n 1)"; test -n "$DAQ"; export LD_LIBRARY_PATH="$(dirname "$DAQ"):${LD_LIBRARY_PATH:-}"; DAQ_PCAP="$(find / -type f -name "daq_pcap.so" 2>/dev/null | head -n 1)"; test -n "$DAQ_PCAP"; DAQ_DIR="$(dirname "$DAQ_PCAP")"; CFG="$(find / -type f -name snort.lua 2>/dev/null | head -n 1)"; test -n "$CFG"; snort --daq-dir "$DAQ_DIR" -T -c "$CFG" -R /work/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules'
