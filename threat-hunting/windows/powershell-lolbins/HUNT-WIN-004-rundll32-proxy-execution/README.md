@@ -1,8 +1,8 @@
 # HUNT-WIN-004 — Rundll32 Proxy Execution & Suspicious DLL Invocation
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1218.011 — System Binary Proxy Execution: Rundll32](https://attack.mitre.org/techniques/T1218/011/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1218.011 — System Binary Proxy Execution: Rundll32](https://attack.mitre.org/techniques/T1218/011/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis

@@ -1,8 +1,8 @@
 # HUNT-WIN-007 — Scheduled Task Persistence & Remote Task Execution
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1053.005 — Scheduled Task/Job: Scheduled Task](https://attack.mitre.org/techniques/T1053/005/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1053.005 — Scheduled Task/Job: Scheduled Task](https://attack.mitre.org/techniques/T1053/005/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis

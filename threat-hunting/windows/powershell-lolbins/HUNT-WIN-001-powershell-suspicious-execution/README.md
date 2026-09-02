@@ -1,8 +1,8 @@
 # HUNT-WIN-001 — PowerShell Suspicious Execution & Post-Execution Activity
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1059.001 — Command and Scripting Interpreter: PowerShell](https://attack.mitre.org/techniques/T1059/001/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1059.001 — Command and Scripting Interpreter: PowerShell](https://attack.mitre.org/techniques/T1059/001/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis

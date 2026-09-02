@@ -1,8 +1,8 @@
 # HUNT-WIN-003 — Mshta Trusted Binary Proxy Execution
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1218.005 — System Binary Proxy Execution: Mshta](https://attack.mitre.org/techniques/T1218/005/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1218.005 — System Binary Proxy Execution: Mshta](https://attack.mitre.org/techniques/T1218/005/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis

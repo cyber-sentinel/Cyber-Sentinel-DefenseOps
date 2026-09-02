@@ -1,8 +1,8 @@
 # HUNT-WIN-006 — WMI / WMIC Remote Process Execution
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1047 — Windows Management Instrumentation](https://attack.mitre.org/techniques/T1047/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1047 — Windows Management Instrumentation](https://attack.mitre.org/techniques/T1047/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis

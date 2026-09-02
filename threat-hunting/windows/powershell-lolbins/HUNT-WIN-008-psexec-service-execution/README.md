@@ -1,8 +1,8 @@
 # HUNT-WIN-008 — PsExec / Service-Based Remote Execution
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1569.002 — System Services: Service Execution](https://attack.mitre.org/techniques/T1569/002/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1569.002 — System Services: Service Execution](https://attack.mitre.org/techniques/T1569/002/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis

@@ -1,8 +1,8 @@
 # HUNT-WIN-005 — Regsvr32 Scriptlet / COM Proxy Execution
 
-**Status:** Experimental Hunt  
-**Platform:** Windows  
-**ATT&CK:** [T1218.010 — System Binary Proxy Execution: Regsvr32](https://attack.mitre.org/techniques/T1218/010/)  
+**Status:** Experimental Hunt
+**Platform:** Windows
+**ATT&CK:** [T1218.010 — System Binary Proxy Execution: Regsvr32](https://attack.mitre.org/techniques/T1218/010/)
 **Linked Detection Pack:** [Windows PowerShell & LOLBins Detection Pack](../../../detections/windows/powershell-lolbins/)
 
 ## Hypothesis
