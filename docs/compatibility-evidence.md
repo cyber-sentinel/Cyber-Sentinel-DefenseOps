@@ -6,9 +6,8 @@ This file records the concrete engine/runtime versions used to validate Cyber-Se
 
 | Component | Version / Channel | Validation |
 |---|---|---|
-| Snort 3 | 3.12.2.0 | Native configuration/rule validation with `snort -T` |
-| LibDAQ | 3.0.27 | Built from official Snort3 source dependency |
-| Zeek | 8.0.9 | Native script load/compile using official `zeek/zeek:8.0.9` image |
+| Snort 3 | 3.12.2.0 | Version-pinned native `snort -T` validation in `openeuler/snort3:3.12.2.0-oe2403sp4`; runtime version is asserted in CI |
+| Zeek | 8.0.9 | Native script load/compile using pinned `zeek/zeek:8.0.9` image |
 | Suricata | Ubuntu 24.04 packaged runtime | Native `suricata -T` validation |
 | YARA | Ubuntu 24.04 packaged runtime | Native `yarac` compilation |
 | Sigma | Sigma CLI + SigmaHQ validators | Strict rule/metadata validation |
