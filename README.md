@@ -66,6 +66,6 @@ Initial repository architecture is being established. Content will be added incr
 
 ---
 
-**Maintainer:** Ali RahimDabagh  
-**Profile:** `cyber-sentinel`  
+**Maintainer:** Ali RahimDabagh
+**Profile:** `cyber-sentinel`
 **Focus:** Information Security Management & Cyber Defense Architecture
