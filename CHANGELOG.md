@@ -14,6 +14,26 @@ The project follows a release-candidate-first model: a green CI run is necessary
 - reproducible lab-validation procedures;
 - stable `v0.1.0` release after quality gates are satisfied.
 
+## [0.1.0-rc.2] — 2026-09-02
+
+### Added
+
+- native Zeek 8.0.9 validation;
+- version-pinned Snort 3.12.2.0 validation workflow;
+- compatibility/version evidence;
+- Q4 lab-validation standard and reusable lab template;
+- explicit stable-release gates.
+
+### Changed
+
+- corrected Snort 3 rule-file comment syntax after native engine validation exposed the issue;
+- optimized native engine validation to use version-pinned runtimes.
+
+### Status
+
+- Zeek: Q2 Engine Validated.
+- Snort 3: native validation gate active; Q2 is not claimed until the final `snort -T` pass.
+
 ## [0.1.0-rc.1] — 2026-09-02
 
 ### Added
