@@ -6,33 +6,33 @@ This checklist defines the minimum evidence required before promoting Cyber-Sent
 
 ### Repository Integrity
 
-- [ ] Repository Hygiene passes on the release commit.
-- [ ] No secret-bearing filenames or committed credentials.
-- [ ] UTF-8 and trailing-whitespace checks pass.
-- [ ] Canonical repository name and links use `Cyber-Sentinel-DefenseOps`.
+- [x] Repository Hygiene passes on the release commit.
+- [x] No secret-bearing filenames or committed credentials.
+- [x] UTF-8 and trailing-whitespace checks pass.
+- [x] Canonical repository name and links use `Cyber-Sentinel-DefenseOps`.
 
 ### Detection Quality
 
-- [ ] Detection pack structural validation passes.
-- [ ] Sigma CLI / SigmaHQ strict validation passes.
-- [ ] YARA compiles with `yarac`.
-- [ ] Suricata accepts the network rules with `suricata -T`.
-- [ ] Snort 3 accepts the Snort 3 rules with `snort -T`.
-- [ ] Zeek loads the Zeek notice script with the pinned runtime.
-- [ ] Positive/negative canonical fixtures pass for all eight current Windows detections.
+- [x] Detection pack structural validation passes.
+- [x] Sigma CLI / SigmaHQ strict validation passes.
+- [x] YARA compiles with `yarac`.
+- [x] Suricata accepts the network rules with `suricata -T`.
+- [x] Snort 3 accepts the Snort 3 rules with `snort -T`.
+- [x] Zeek loads the Zeek notice script with the pinned runtime.
+- [x] Positive/negative canonical fixtures pass for all eight current Windows detections.
 
 ### Hunting Quality
 
-- [ ] Threat-hunting structural/content validation passes.
-- [ ] Query language names are explicit; ambiguous `KQL` naming is prohibited.
+- [x] Threat-hunting structural/content validation passes.
+- [x] Query language names are explicit; ambiguous `KQL` naming is prohibited.
 
 ### Evidence & Documentation
 
-- [ ] Engine/runtime versions are recorded in `docs/compatibility-evidence.md`.
-- [ ] Validation levels are consistent with `docs/quality-model.md`.
-- [ ] Q4 lab-validation standard and reusable lab template exist.
-- [ ] `CHANGELOG.md` describes the stable release delta.
-- [ ] `VERSION` is updated to `0.1.0` only after all mandatory gates pass.
+- [x] Engine/runtime versions are recorded in `docs/compatibility-evidence.md`.
+- [x] Validation levels are consistent with `docs/quality-model.md`.
+- [x] Q4 lab-validation standard and reusable lab template exist.
+- [x] `CHANGELOG.md` describes the stable release delta.
+- [x] `VERSION` is updated to `0.1.0` only after all mandatory gates pass.
 
 ## Non-Blocking for v0.1.0
 
