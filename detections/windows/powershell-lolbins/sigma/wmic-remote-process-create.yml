@@ -1,0 +1,27 @@
+title: WMIC Remote Process Creation
+id: c7496557-eebb-42d2-9cc2-aa24092817fe
+status: experimental
+description: Detects wmic.exe using a remote node with process call create.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1047/
+tags:
+  - attack.t1047
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith: '\\wmic.exe'
+  selection_remote:
+    CommandLine|contains: '/node:'
+  selection_exec:
+    CommandLine|contains|all:
+      - 'process'
+      - 'call'
+      - 'create'
+  condition: selection_image and selection_remote and selection_exec
+falsepositives:
+  - Legacy remote administration or software-management scripts using WMIC.
+level: high

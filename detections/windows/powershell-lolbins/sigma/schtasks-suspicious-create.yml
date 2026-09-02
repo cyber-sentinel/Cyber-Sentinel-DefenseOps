@@ -1,0 +1,32 @@
+title: Suspicious Scheduled Task Creation
+id: 06e9ed31-5949-4af4-8133-e19731a3e15b
+status: experimental
+description: Detects schtasks.exe task creation where the task action references interpreters, LOLBins, or user-writable paths.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1053/005/
+tags:
+  - attack.t1053.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith: '\\schtasks.exe'
+  selection_create:
+    CommandLine|contains: '/create'
+  selection_suspicious:
+    CommandLine|contains:
+      - 'powershell'
+      - 'pwsh'
+      - 'cmd /c'
+      - 'mshta'
+      - 'rundll32'
+      - 'regsvr32'
+      - '\\AppData\\'
+      - '\\Temp\\'
+  condition: selection_image and selection_create and selection_suspicious
+falsepositives:
+  - Software installers, enterprise management tools, or administrator-created maintenance tasks.
+level: medium

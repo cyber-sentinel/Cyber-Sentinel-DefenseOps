@@ -1,0 +1,26 @@
+title: Mshta Remote or Script-Protocol Execution
+id: c2da1d81-b74d-426b-8e38-6b0f2bd47a41
+status: experimental
+description: Detects mshta.exe executing remote URLs or inline script protocols.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1218/005/
+tags:
+  - attack.t1218.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith: '\\mshta.exe'
+  selection_cli:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+      - 'javascript:'
+      - 'vbscript:'
+  condition: selection_image and selection_cli
+falsepositives:
+  - Legacy enterprise applications intentionally launching remote HTA content.
+level: high

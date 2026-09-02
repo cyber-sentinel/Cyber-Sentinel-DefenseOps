@@ -1,0 +1,5 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine)
+| where Proc in ("powershell.exe", "pwsh.exe")
+| where Cmd has_any (" -enc ", " -encodedcommand ", " /enc ", " -e ")
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine

@@ -1,0 +1,26 @@
+title: Regsvr32 Scriptlet or Scrobj Abuse
+id: 10f165c0-143e-4039-ba84-8bbb89be0ad1
+status: experimental
+description: Detects regsvr32.exe command lines containing scrobj.dll and registration arguments commonly associated with scriptlet proxy execution.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1218/010/
+tags:
+  - attack.t1218.010
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith: '\\regsvr32.exe'
+  selection_scrobj:
+    CommandLine|contains: 'scrobj.dll'
+  selection_switch:
+    CommandLine|contains:
+      - '/i:'
+      - '-i:'
+  condition: selection_image and selection_scrobj and selection_switch
+falsepositives:
+  - Uncommon legitimate COM registration workflows using scrobj.dll.
+level: high

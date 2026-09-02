@@ -60,6 +60,10 @@ This repository is intended for authorized defensive security engineering, contr
 
 Do not deploy untested content directly to production environments.
 
+## Detection Packs
+
+- [Windows PowerShell & LOLBins Detection Pack v0.1](./detections/windows/powershell-lolbins/) — Sigma, Splunk SPL, KQL, ATT&CK mapping, validation guidance, and production tuning notes.
+
 ## Status
 
 Initial repository architecture is being established. Content will be added incrementally with emphasis on technical quality rather than repository volume.

@@ -1,0 +1,23 @@
+title: PsExec or PSEXESVC Execution
+id: e7ab5bbd-f74c-44cd-8bef-7b60c58da617
+status: experimental
+description: Detects PsExec client or PSEXESVC service-side process execution indicators.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1569/002/
+tags:
+  - attack.t1569.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+      - '\\PsExec.exe'
+      - '\\PsExec64.exe'
+      - '\\PSEXESVC.exe'
+  condition: selection
+falsepositives:
+  - Authorized systems administration, remote support, software deployment, or incident-response activity using PsExec.
+level: medium

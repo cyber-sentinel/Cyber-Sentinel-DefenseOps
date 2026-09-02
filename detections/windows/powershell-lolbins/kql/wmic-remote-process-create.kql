@@ -1,0 +1,6 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine)
+| where Proc == "wmic.exe"
+| where Cmd contains "/node:"
+| where Cmd contains "process" and Cmd contains "call" and Cmd contains "create"
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine

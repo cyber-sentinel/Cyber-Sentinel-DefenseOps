@@ -1,0 +1,28 @@
+title: Suspicious PowerShell Encoded Command
+id: 63b33337-08e6-4ec8-8410-8d3ef4f5e718
+status: experimental
+description: Detects PowerShell or PowerShell Core launched with encoded-command switches.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+tags:
+  - attack.t1059.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith:
+      - '\\powershell.exe'
+      - '\\pwsh.exe'
+  selection_cli:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -encodedcommand '
+      - ' /enc '
+      - ' -e '
+  condition: selection_image and selection_cli
+falsepositives:
+  - Administrative automation using encoded PowerShell for legitimate deployment or management.
+level: high

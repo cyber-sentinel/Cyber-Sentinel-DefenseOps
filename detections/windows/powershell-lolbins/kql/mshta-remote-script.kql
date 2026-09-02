@@ -1,0 +1,5 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine)
+| where Proc == "mshta.exe"
+| where Cmd has_any ("http://", "https://", "javascript:", "vbscript:")
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine

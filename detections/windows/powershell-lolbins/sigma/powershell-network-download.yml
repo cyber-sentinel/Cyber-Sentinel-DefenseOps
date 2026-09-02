@@ -1,0 +1,30 @@
+title: PowerShell Network Download Pattern
+id: 5be5d4b5-d6ff-4fdd-b5ef-0b9d2cca54de
+status: experimental
+description: Detects PowerShell command lines containing common network retrieval primitives that warrant investigation.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+tags:
+  - attack.t1059.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith:
+      - '\\powershell.exe'
+      - '\\pwsh.exe'
+  selection_cli:
+    CommandLine|contains:
+      - 'Invoke-WebRequest'
+      - 'iwr '
+      - 'DownloadString'
+      - 'DownloadFile'
+      - 'WebClient'
+      - 'Start-BitsTransfer'
+  condition: selection_image and selection_cli
+falsepositives:
+  - Software deployment, administration, or bootstrap scripts retrieving approved content.
+level: medium

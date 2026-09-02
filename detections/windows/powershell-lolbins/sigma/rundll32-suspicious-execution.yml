@@ -1,0 +1,26 @@
+title: Rundll32 Suspicious Script or Remote Execution
+id: dc90339f-a0b5-440f-afa3-829baf8793b0
+status: experimental
+description: Detects rundll32.exe with script-protocol or remote-content indicators.
+author: Ali RahimDabagh (Cyber-Sentinel)
+date: 2026-09-02
+references:
+  - https://attack.mitre.org/techniques/T1218/011/
+tags:
+  - attack.t1218.011
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith: '\\rundll32.exe'
+  selection_cli:
+    CommandLine|contains:
+      - 'javascript:'
+      - 'vbscript:'
+      - 'http://'
+      - 'https://'
+  condition: selection_image and selection_cli
+falsepositives:
+  - Rare vendor tooling invoking rundll32 with URL handlers.
+level: high

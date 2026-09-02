@@ -1,0 +1,5 @@
+index=windows (EventCode=1 OR EventCode=4688)
+| eval proc=lower(coalesce(Image, New_Process_Name, process_path)), cmd=lower(coalesce(CommandLine, Process_Command_Line, process_command_line))
+| where like(proc,"%\\schtasks.exe") AND like(cmd,"%/create%")
+  AND (like(cmd,"%powershell%") OR like(cmd,"%pwsh%") OR like(cmd,"%cmd /c%") OR like(cmd,"%mshta%") OR like(cmd,"%rundll32%") OR like(cmd,"%regsvr32%") OR like(cmd,"%\\appdata\\%") OR like(cmd,"%\\temp\\%"))
+| table _time host user proc cmd ParentImage

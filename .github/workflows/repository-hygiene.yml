@@ -24,6 +24,14 @@ jobs:
             exit 1
           fi
 
+      - name: Install YAML parser
+        shell: bash
+        run: python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Validate Sigma detection packs
+        shell: bash
+        run: python tools/validate_detection_pack.py
+
       - name: Validate text files
         shell: bash
         run: |
