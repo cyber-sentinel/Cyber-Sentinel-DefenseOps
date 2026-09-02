@@ -1,0 +1,9 @@
+# Cyber-Sentinel-Forge
+# Network adjunct detections for the Windows PowerShell & LOLBins pack.
+# Requires HTTP visibility. TLS-encrypted traffic is not inspectable without decryption/visibility upstream.
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"CS DET-WIN-002 Potential PowerShell HTTP User-Agent"; flow:established,to_server; http.user_agent; content:"PowerShell"; nocase; classtype:policy-violation; sid:9001001; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"CS DET-WIN-003 HTA Retrieval Over HTTP"; flow:established,to_server; http.uri; pcre:"/\\.hta(?:[?#]|$)/i"; classtype:policy-violation; sid:9001002; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"CS DET-WIN-005 Scriptlet SCT Retrieval Over HTTP"; flow:established,to_server; http.uri; pcre:"/\\.sct(?:[?#]|$)/i"; classtype:policy-violation; sid:9001003; rev:1;)

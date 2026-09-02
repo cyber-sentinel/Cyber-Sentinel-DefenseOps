@@ -1,0 +1,1 @@
+process where process.name == "mshta.exe" and process.command_line : ("*http://*", "*https://*", "*javascript:*", "*vbscript:*")

@@ -1,0 +1,1 @@
+process.name: "wmic.exe" and process.command_line: "*/node:*" and process.command_line: "*process*" and process.command_line: "*call*" and process.command_line: "*create*"

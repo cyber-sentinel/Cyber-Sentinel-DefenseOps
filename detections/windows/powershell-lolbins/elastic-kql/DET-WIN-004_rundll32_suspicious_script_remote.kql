@@ -1,0 +1,1 @@
+process.name: "rundll32.exe" and process.command_line: ("*javascript:*" or "*vbscript:*" or "*http://*" or "*https://*")

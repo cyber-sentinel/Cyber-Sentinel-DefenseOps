@@ -1,0 +1,52 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "process.name": {
+              "value": "regsvr32.exe",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*/i:*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*-i:*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*scrobj.dll*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

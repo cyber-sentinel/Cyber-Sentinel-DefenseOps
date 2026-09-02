@@ -1,0 +1,102 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "process.name": {
+              "value": "schtasks.exe",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "must": [
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*/create*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*powershell*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*pwsh*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*cmd /c*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*mshta*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*rundll32*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*regsvr32*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*\\\\AppData\\\\*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*\\\\Temp\\\\*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

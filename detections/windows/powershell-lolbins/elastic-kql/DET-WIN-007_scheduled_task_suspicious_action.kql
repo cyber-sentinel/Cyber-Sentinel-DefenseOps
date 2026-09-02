@@ -1,0 +1,1 @@
+process.name: "schtasks.exe" and process.command_line: "*/create*" and process.command_line: ("*powershell*" or "*pwsh*" or "*cmd /c*" or "*mshta*" or "*rundll32*" or "*regsvr32*" or "*\\AppData\\*" or "*\\Temp\\*")

@@ -1,0 +1,1 @@
+process where process.name in ("powershell.exe", "pwsh.exe") and process.command_line : ("*invoke-webrequest*", "*downloadstring*", "*downloadfile*", "*webclient*", "*start-bitstransfer*")

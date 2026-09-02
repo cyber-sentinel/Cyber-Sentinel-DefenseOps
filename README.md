@@ -62,7 +62,7 @@ Do not deploy untested content directly to production environments.
 
 ## Detection Packs
 
-- [Windows PowerShell & LOLBins Detection Pack v0.1](./detections/windows/powershell-lolbins/) — Sigma, Splunk SPL, KQL, ATT&CK mapping, validation guidance, and production tuning notes.
+- [Windows PowerShell & LOLBins Detection Pack v0.2](./detections/windows/powershell-lolbins/) — Sigma, Splunk SPL, Microsoft KQL, Elastic KQL/EQL/Query DSL, plus YARA and Suricata where the observable type is technically appropriate.
 
 ## Status
 

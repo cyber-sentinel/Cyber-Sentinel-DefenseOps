@@ -1,0 +1,1 @@
+process.name: ("psexec.exe" or "psexec64.exe" or "psexesvc.exe")

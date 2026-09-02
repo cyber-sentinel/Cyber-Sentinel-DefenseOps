@@ -1,0 +1,48 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "bool": {
+            "should": [
+              {
+                "term": {
+                  "process.name": {
+                    "value": "psexec.exe",
+                    "case_insensitive": true
+                  }
+                }
+              },
+              {
+                "term": {
+                  "process.name": {
+                    "value": "psexec64.exe",
+                    "case_insensitive": true
+                  }
+                }
+              },
+              {
+                "term": {
+                  "process.name": {
+                    "value": "psexesvc.exe",
+                    "case_insensitive": true
+                  }
+                }
+              }
+            ],
+            "minimum_should_match": 1
+          }
+        }
+      ]
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

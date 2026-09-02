@@ -1,6 +1,6 @@
-# Windows PowerShell & LOLBins Detection Pack v0.1
+# Windows PowerShell & LOLBins Detection Pack v0.2
 
-This pack provides defensive detections for high-signal Windows command execution and LOLBin abuse patterns.
+This pack provides multi-engine defensive detections for high-signal Windows command execution and LOLBin abuse patterns.
 
 ## Coverage
 
@@ -15,22 +15,36 @@ This pack provides defensive detections for high-signal Windows command executio
 | DET-WIN-007 | Suspicious Scheduled Task Creation | T1053.005 |
 | DET-WIN-008 | PsExec / PSEXESVC Execution | T1569.002 |
 
-## Formats
+## Detection Engines
 
-Each use case is provided in:
+The pack intentionally separates query languages that are often conflated:
 
-- Sigma
-- Splunk SPL
-- Microsoft Defender XDR KQL
+- `sigma/` — portable Sigma process-creation rules
+- `splunk/` — Splunk SPL
+- `kql/` — Microsoft Kusto Query Language for Microsoft Defender XDR / Sentinel-style telemetry
+- `elastic-kql/` — Kibana Query Language against ECS process fields
+- `elastic-eql/` — Elastic Event Query Language against ECS process events
+- `elastic-query-dsl/` — Elasticsearch Query DSL JSON
+- `yara/` — file or memory artifact detection only where YARA is technically meaningful
+- `suricata/` — network adjunct detections only where an HTTP/network observable exists
+
+See [engine-coverage.md](./engine-coverage.md) for the per-use-case matrix.
 
 ## Telemetry
 
-Recommended telemetry sources:
+Recommended endpoint telemetry sources:
 
 - Sysmon Event ID 1 (Process Create)
 - Windows Security Event ID 4688 with command-line auditing enabled
 - Microsoft Defender XDR `DeviceProcessEvents`
-- EDR/XDR process telemetry with full command line
+- Elastic Endpoint / ECS-compatible process telemetry
+- Other EDR/XDR process telemetry with full command line
+
+Network adjunct rules require:
+
+- Suricata HTTP visibility
+- plaintext HTTP or an architecture that provides decrypted HTTP visibility
+- appropriate `HOME_NET` / `EXTERNAL_NET` definitions
 
 ## Validation Model
 
@@ -38,7 +52,7 @@ Rules are intentionally marked `experimental` until tuned against a target envir
 
 Before production deployment:
 
-1. Validate required fields.
+1. Validate required fields and field mappings.
 2. Replay synthetic or sanitized telemetry.
 3. Measure baseline frequency for at least 7–14 days where practical.
 4. Identify administrative tooling and software-distribution exceptions.
@@ -50,4 +64,4 @@ See [validation.md](./validation.md).
 
 ## Production Warning
 
-Do not copy rules directly into production without field normalization and baseline tuning. SPL field names and index/sourcetype conventions vary by deployment.
+Do not copy rules directly into production without field normalization and baseline tuning. SPL index/sourcetype conventions, Elastic ECS mappings, Microsoft table availability, and Suricata visibility vary by deployment.

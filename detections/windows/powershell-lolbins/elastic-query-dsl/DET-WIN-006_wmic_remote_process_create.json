@@ -1,0 +1,59 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "process.name": {
+              "value": "wmic.exe",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "must": [
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*/node:*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*process*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*call*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line": {
+              "value": "*create*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

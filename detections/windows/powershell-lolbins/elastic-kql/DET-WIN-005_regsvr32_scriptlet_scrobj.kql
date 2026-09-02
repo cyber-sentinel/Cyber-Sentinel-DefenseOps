@@ -1,0 +1,1 @@
+process.name: "regsvr32.exe" and process.command_line: "*scrobj.dll*" and process.command_line: ("*/i:*" or "*-i:*")
