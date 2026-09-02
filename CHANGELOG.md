@@ -8,11 +8,48 @@ The project follows a release-candidate-first model: a green CI run is necessary
 
 ### Planned
 
-- native Snort 3 validation where practical;
-- native Zeek script validation where practical;
-- compatibility/version evidence for supported engines;
-- reproducible lab-validation procedures;
-- stable `v0.1.0` release after quality gates are satisfied.
+- reproducible Q4 lab-validation evidence;
+- broader platform coverage;
+- additional vendor-native validation where compatible test environments exist.
+
+## [0.1.0] — 2026-09-02
+
+### Stable Baseline
+
+- all mandatory DefenseOps v0.1.0 release gates satisfied;
+- Repository Hygiene passes;
+- Sigma CLI / SigmaHQ strict validation passes;
+- YARA native compilation passes;
+- Suricata native `-T` validation passes;
+- Snort 3.12.2.0 native `snort -T` validation passes;
+- Zeek 8.0.9 native script validation passes;
+- positive/negative fixtures pass for all eight current Windows detections;
+- threat-hunting validation passes;
+- compatibility evidence and Q4 lab-validation standards are documented.
+
+### Scope Boundary
+
+Stable means the repository's defined v0.1.0 quality gates are satisfied. It does not imply Q5/Q6 or universal validation in every vendor tenant.
+
+## [0.1.0-rc.2] — 2026-09-02
+
+### Added
+
+- native Zeek 8.0.9 validation;
+- version-pinned Snort 3.12.2.0 validation workflow;
+- compatibility/version evidence;
+- Q4 lab-validation standard and reusable lab template;
+- explicit stable-release gates.
+
+### Changed
+
+- corrected Snort 3 rule-file comment syntax after native engine validation exposed the issue;
+- optimized native engine validation to use version-pinned runtimes.
+
+### Status
+
+- Zeek: Q2 Engine Validated.
+- Snort 3: Q2 Engine Validated after version-pinned `snort -T` pass.
 
 ## [0.1.0-rc.1] — 2026-09-02
 

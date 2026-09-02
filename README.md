@@ -3,7 +3,7 @@
 **Open Cyber Defense Operations Engineering**
 
 [![Repository Hygiene](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml/badge.svg)](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml)
-![Release Candidate](https://img.shields.io/badge/release-v0.1.0--rc.1-informational)
+![Stable Release](https://img.shields.io/badge/release-v0.1.0-success)
 ![ATT&CK Mapped](https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-informational)
 ![Multi-Engine](https://img.shields.io/badge/detection-multi--engine-informational)
 
@@ -25,15 +25,17 @@ Cyber-Sentinel
 
 DefenseOps is intentionally content- and engineering-first. Cyber-Sentinel-Atlas will consume curated DefenseOps knowledge through web, offline, API, and CLI interfaces rather than duplicating it.
 
-## Current Release Candidate
+## Current Stable Release
 
-`v0.1.0-rc.1`
+`v0.1.0`
 
-The release candidate introduces a formal quality model:
+The first stable baseline establishes a formal quality and validation model:
 
 - native Sigma validation with Sigma CLI;
 - native YARA compilation with `yarac`;
 - native Suricata configuration/rule validation;
+- native Snort 3.12.2.0 rule validation;
+- native Zeek 8.0.9 script validation;
 - positive and negative synthetic detection fixtures;
 - explicit engine-validation maturity levels;
 - CI enforcement for detection and hunting packs.
@@ -51,6 +53,8 @@ See:
 | Sigma rules | Sigma CLI / SigmaHQ strict validation | Q2 |
 | YARA rules | Native `yarac` compilation | Q2 |
 | Suricata rules | Native `suricata -T` validation | Q2 |
+| Zeek scripts | Native Zeek 8.0.9 script load validation | Q2 |
+| Snort 3 rules | Native Snort 3.12.2.0 `snort -T` validation | Q2 |
 | Canonical Windows detection behavior | Positive + negative synthetic fixtures | Q3 |
 | Threat-hunting content | Repository structural/content validation | Q1 |
 | Vendor-specific SIEM/EDR queries | Static/schema-aware review | Q1 |

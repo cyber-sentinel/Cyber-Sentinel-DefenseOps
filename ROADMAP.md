@@ -7,17 +7,13 @@
 - Multi-engine Windows PowerShell & LOLBins detection pack
 - Threat hunting engineering pack
 - Repository quality model
-- Sigma/YARA/Suricata native validation
+- Sigma/YARA/Suricata/Snort 3/Zeek native validation
 - Positive/negative detection fixtures
-- Release candidate: `v0.1.0-rc.1`
+- Stable baseline: `v0.1.0`
 
-## Next: DefenseOps v0.1.0
+## Next: Cyber-Sentinel-Atlas Product Architecture
 
-- finish release-candidate verification;
-- add native Snort 3 and Zeek validation where practical;
-- formalize compatibility/version evidence;
-- document reproducible lab-validation criteria;
-- publish first stable release only when the defined quality gates are satisfied.
+DefenseOps v0.1.0 is the validated engineering baseline. Major DefenseOps content expansion pauses while the Atlas product architecture and MVP foundation are designed.
 
 ## Strategic Product: Cyber-Sentinel-Atlas
 
@@ -54,7 +50,7 @@ Atlas is the planned signature project.
 ```text
 DefenseOps identity stabilized
         ↓
-DefenseOps v0.1.0 hardening
+DefenseOps v0.1.0 stable baseline
         ↓
 Atlas product architecture
         ↓

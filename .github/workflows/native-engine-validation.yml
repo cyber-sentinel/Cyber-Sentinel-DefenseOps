@@ -1,0 +1,71 @@
+name: Native Engine Validation
+
+on:
+  pull_request:
+    paths:
+      - "detections/**/snort3/**"
+      - "detections/**/zeek/**"
+      - ".github/workflows/native-engine-validation.yml"
+      - "docs/compatibility-evidence.md"
+      - "docs/lab-validation-standard.md"
+  push:
+    branches:
+      - "hardening/**"
+    paths:
+      - "detections/**/snort3/**"
+      - "detections/**/zeek/**"
+      - ".github/workflows/native-engine-validation.yml"
+      - "docs/compatibility-evidence.md"
+      - "docs/lab-validation-standard.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-engine-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  zeek-native:
+    name: Zeek 8.0.9 native validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Validate Zeek script with pinned runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull zeek/zeek:8.0.9
+          docker run --rm \
+            -v "$PWD:/work:ro" \
+            -w /work \
+            zeek/zeek:8.0.9 \
+            zeek -b detections/windows/powershell-lolbins/zeek/powershell_lolbin_http_notices.zeek
+
+  snort3-native:
+    name: Snort 3.12.2.0 native validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Pull pinned Snort 3 runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull openeuler/snort3:3.12.2.0-oe2403sp4
+
+      - name: Assert Snort version and validate rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE=openeuler/snort3:3.12.2.0-oe2403sp4
+          docker run --rm --entrypoint sh "$IMAGE" -lc 'set -e; DAQ="$(find / -type f -name "libdaq.so.3*" 2>/dev/null | head -n 1)"; test -n "$DAQ"; export LD_LIBRARY_PATH="$(dirname "$DAQ"):${LD_LIBRARY_PATH:-}"; snort -V 2>&1 | tee /tmp/snort-version.txt; grep -F "3.12.2.0" /tmp/snort-version.txt'
+          docker run --rm \
+            --entrypoint sh \
+            -v "$PWD:/work:ro" \
+            "$IMAGE" \
+            -lc 'set -e; DAQ="$(find / -type f -name "libdaq.so.3*" 2>/dev/null | head -n 1)"; test -n "$DAQ"; export LD_LIBRARY_PATH="$(dirname "$DAQ"):${LD_LIBRARY_PATH:-}"; DAQ_PCAP="$(find / -type f -name "daq_pcap.so" 2>/dev/null | head -n 1)"; test -n "$DAQ_PCAP"; DAQ_DIR="$(dirname "$DAQ_PCAP")"; CFG="$(find / -type f -name snort.lua 2>/dev/null | head -n 1)"; test -n "$CFG"; snort --daq-dir "$DAQ_DIR" -T -c "$CFG" -R /work/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules'
