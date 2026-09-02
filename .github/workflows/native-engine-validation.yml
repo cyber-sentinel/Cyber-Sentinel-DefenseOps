@@ -80,7 +80,7 @@ jobs:
           cd /tmp/libdaq
           ./bootstrap
           ./configure --prefix=/opt/snort3
-          make -j2
+          make -j"$(nproc)"
           sudo make install
 
       - name: Build Snort 3.12.2.0
@@ -92,7 +92,7 @@ jobs:
           cd /tmp/snort3-src
           ./configure_cmake.sh --prefix=/opt/snort3
           cd build
-          make -j2
+          make -j"$(nproc)"
           sudo make install
 
       - name: Validate Snort 3 rules
