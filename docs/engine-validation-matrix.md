@@ -7,8 +7,8 @@ This matrix describes **validation capability**, not marketing coverage.
 | Sigma | Sigma CLI / pySigma checks | Q2 | Backend field mappings still require deployment-specific validation |
 | YARA | `yarac` compilation | Q2 | Artifact quality still requires representative samples |
 | Suricata | `suricata -T` with repository rules | Q2 | Network visibility and protocol configuration vary |
-| Snort 3 | Static structure currently; native CI planned | Q1 → Q2 | Requires Snort 3 runtime/config |
-| Zeek | Static structure currently; native CI planned | Q1 → Q2 | Requires Zeek runtime/script compatibility |
+| Snort 3 | Version-pinned native `snort -T` CI | Q1 → Q2 pending final pass | Q2 applies only after the pinned runtime accepts the repository rules |
+| Zeek | Native script load with Zeek 8.0.9 | Q2 | Validate again when changing Zeek major/minor versions |
 | Splunk SPL | Static/reviewed query | Q1 | Index, sourcetype, CIM, and field names vary |
 | Microsoft Kusto Query Language (KQL) | Static/reviewed query | Q1 | Defender/Sentinel table and tenant schema validation required |
 | Microsoft Defender XDR Custom Detection | Metadata + Microsoft KQL linkage | Q1 | Tenant execution and custom-detection constraints required |
