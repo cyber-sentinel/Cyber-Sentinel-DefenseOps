@@ -1,8 +1,8 @@
 # HUNT-<PLATFORM>-<ID> — <Title>
 
-**Status:** Experimental Hunt  
-**Platform:**  
-**ATT&CK:**  
+**Status:** Experimental Hunt
+**Platform:**
+**ATT&CK:**
 
 ## Hypothesis
 
