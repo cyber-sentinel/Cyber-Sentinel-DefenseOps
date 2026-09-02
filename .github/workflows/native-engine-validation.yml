@@ -63,9 +63,9 @@ jobs:
         run: |
           set -euo pipefail
           IMAGE=openeuler/snort3:3.12.2.0-oe2403sp4
-          docker run --rm --entrypoint sh "$IMAGE" -lc 'snort -V 2>&1 | tee /tmp/snort-version.txt; grep -F "3.12.2.0" /tmp/snort-version.txt'
+          docker run --rm --entrypoint sh "$IMAGE" -lc 'set -e; DAQ="$(find / -type f -name "libdaq.so.3*" 2>/dev/null | head -n 1)"; test -n "$DAQ"; export LD_LIBRARY_PATH="$(dirname "$DAQ"):${LD_LIBRARY_PATH:-}"; snort -V 2>&1 | tee /tmp/snort-version.txt; grep -F "3.12.2.0" /tmp/snort-version.txt'
           docker run --rm \
             --entrypoint sh \
             -v "$PWD:/work:ro" \
             "$IMAGE" \
-            -lc 'set -e; CFG="$(find / -type f -name snort.lua 2>/dev/null | head -n 1)"; test -n "$CFG"; snort -T -c "$CFG" -R /work/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules'
+            -lc 'set -e; DAQ="$(find / -type f -name "libdaq.so.3*" 2>/dev/null | head -n 1)"; test -n "$DAQ"; export LD_LIBRARY_PATH="$(dirname "$DAQ"):${LD_LIBRARY_PATH:-}"; CFG="$(find / -type f -name snort.lua 2>/dev/null | head -n 1)"; test -n "$CFG"; snort -T -c "$CFG" -R /work/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules'
