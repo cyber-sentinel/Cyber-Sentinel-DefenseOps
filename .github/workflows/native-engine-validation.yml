@@ -1,0 +1,107 @@
+name: Native Engine Validation
+
+on:
+  pull_request:
+    paths:
+      - "detections/**/snort3/**"
+      - "detections/**/zeek/**"
+      - ".github/workflows/native-engine-validation.yml"
+      - "docs/compatibility-evidence.md"
+      - "docs/lab-validation-standard.md"
+  push:
+    branches:
+      - "hardening/**"
+    paths:
+      - "detections/**/snort3/**"
+      - "detections/**/zeek/**"
+      - ".github/workflows/native-engine-validation.yml"
+      - "docs/compatibility-evidence.md"
+      - "docs/lab-validation-standard.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zeek-native:
+    name: Zeek 8.0.9 native validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Validate Zeek script with official image
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull zeek/zeek:8.0.9
+          docker run --rm \
+            -v "$PWD:/work:ro" \
+            -w /work \
+            zeek/zeek:8.0.9 \
+            zeek -b detections/windows/powershell-lolbins/zeek/powershell_lolbin_http_notices.zeek
+
+  snort3-native:
+    name: Snort 3.12.2.0 native validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Snort 3 build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y \
+            autoconf \
+            automake \
+            build-essential \
+            cmake \
+            flex \
+            bison \
+            libdumbnet-dev \
+            libhwloc-dev \
+            libluajit-5.1-dev \
+            libpcap-dev \
+            libpcre2-dev \
+            libssl-dev \
+            libtool \
+            pkg-config \
+            zlib1g-dev
+
+      - name: Build LibDAQ 3.0.27
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch v3.0.27 https://github.com/snort3/libdaq.git /tmp/libdaq
+          cd /tmp/libdaq
+          ./bootstrap
+          ./configure --prefix=/opt/snort3
+          make -j2
+          sudo make install
+
+      - name: Build Snort 3.12.2.0
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PKG_CONFIG_PATH=/opt/snort3/lib/pkgconfig:${PKG_CONFIG_PATH:-}
+          git clone --depth 1 --branch 3.12.2.0 https://github.com/snort3/snort3.git /tmp/snort3-src
+          cd /tmp/snort3-src
+          ./configure_cmake.sh --prefix=/opt/snort3
+          cd build
+          make -j2
+          sudo make install
+
+      - name: Validate Snort 3 rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LD_LIBRARY_PATH=/opt/snort3/lib:${LD_LIBRARY_PATH:-}
+          /opt/snort3/bin/snort -V
+          SNORT_LUA="$(find /opt/snort3 -type f -name snort.lua | head -n 1)"
+          test -n "$SNORT_LUA"
+          /opt/snort3/bin/snort \
+            -T \
+            -c "$SNORT_LUA" \
+            -R "$GITHUB_WORKSPACE/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules"
