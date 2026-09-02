@@ -1,6 +1,6 @@
-# Cyber-Sentinel-Forge
+# Cyber-Sentinel-DefenseOps
 
-**Flagship Cyber Defense Engineering Lab**
+**Open Cyber Defense Operations Engineering**
 
 [![Repository Hygiene](https://github.com/cyber-sentinel/Cyber-Sentinel-Forge/actions/workflows/repository-hygiene.yml/badge.svg)](https://github.com/cyber-sentinel/Cyber-Sentinel-Forge/actions/workflows/repository-hygiene.yml)
 ![Release Candidate](https://img.shields.io/badge/release-v0.1.0--rc.1-informational)
@@ -9,11 +9,21 @@
 
 [Cyber-Sentinel Profile](https://github.com/cyber-sentinel)
 
-Cyber-Sentinel-Forge is a practical cyber defense engineering repository focused on building reusable, testable, and production-aware defensive security content.
+Cyber-Sentinel-DefenseOps is the open engineering core of the Cyber-Sentinel ecosystem, focused on reusable, testable, production-aware detections, hunts, validation assets, response content, and defensive automation.
 
 ## Mission
 
-Turn cyber defense knowledge into engineering artifacts that can be reviewed, tested, measured, and operationalized.
+Turn cyber defense knowledge into engineering artifacts that can be reviewed, tested, measured, automated, and operationalized.
+
+## Ecosystem Position
+
+```text
+Cyber-Sentinel
+├── DefenseOps  → open defensive engineering content, validation, hunts, detections and automation
+└── Atlas       → planned global cyber defense intelligence, search and analyst platform
+```
+
+DefenseOps is intentionally content- and engineering-first. Cyber-Sentinel-Atlas will consume curated DefenseOps knowledge through web, offline, API, and CLI interfaces rather than duplicating it.
 
 ## Current Release Candidate
 
@@ -45,7 +55,7 @@ See:
 
 ## Detection Engineering Standard
 
-Cyber-Sentinel-Forge uses explicit engine/language names. Ambiguous labels such as **KQL** by itself are not used.
+Cyber-Sentinel-DefenseOps uses explicit engine/language names. Ambiguous labels such as **KQL** by itself are not used.
 
 See [Detection Engine & Language Registry](./docs/detection-engine-registry.md).
 

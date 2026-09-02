@@ -1,6 +1,6 @@
 # Detection Engine & Language Registry
 
-This document is the naming authority for Cyber-Sentinel-Forge.
+This document is the naming authority for Cyber-Sentinel-DefenseOps.
 
 ## Rule
 
