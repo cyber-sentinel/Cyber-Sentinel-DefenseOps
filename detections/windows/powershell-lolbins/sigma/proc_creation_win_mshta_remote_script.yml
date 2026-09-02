@@ -4,9 +4,8 @@ status: experimental
 description: Detects mshta.exe executing remote URLs or inline script protocols.
 author: Ali RahimDabagh (Cyber-Sentinel)
 date: 2026-09-02
-references:
-  - https://attack.mitre.org/techniques/T1218/005/
 tags:
+  - attack.stealth
   - attack.t1218.005
 logsource:
   category: process_creation

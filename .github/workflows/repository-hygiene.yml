@@ -45,7 +45,7 @@ jobs:
       - name: Validate Sigma with Sigma CLI
         shell: bash
         run: |
-          sigma check --fail-on-error detections/windows/powershell-lolbins/sigma
+          sigma check --fail-on-error --fail-on-issues detections/windows/powershell-lolbins/sigma
 
       - name: Compile YARA with yarac
         shell: bash
@@ -56,7 +56,7 @@ jobs:
         shell: bash
         run: |
           sudo mkdir -p /tmp/suricata-log
-          suricata -T -c /etc/suricata/suricata.yaml -S detections/windows/powershell-lolbins/suricata/powershell_lolbin_http.rules -l /tmp/suricata-log
+          sudo suricata -T -c /etc/suricata/suricata.yaml -S detections/windows/powershell-lolbins/suricata/powershell_lolbin_http.rules -l /tmp/suricata-log
 
       - name: Validate positive and negative detection fixtures
         shell: bash

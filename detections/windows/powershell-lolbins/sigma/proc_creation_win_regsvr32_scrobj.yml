@@ -4,9 +4,8 @@ status: experimental
 description: Detects regsvr32.exe command lines containing scrobj.dll and registration arguments commonly associated with scriptlet proxy execution.
 author: Ali RahimDabagh (Cyber-Sentinel)
 date: 2026-09-02
-references:
-  - https://attack.mitre.org/techniques/T1218/010/
 tags:
+  - attack.stealth
   - attack.t1218.010
 logsource:
   category: process_creation

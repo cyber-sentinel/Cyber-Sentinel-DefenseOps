@@ -4,9 +4,10 @@ status: experimental
 description: Detects schtasks.exe task creation where the task action references interpreters, LOLBins, or user-writable paths.
 author: Ali RahimDabagh (Cyber-Sentinel)
 date: 2026-09-02
-references:
-  - https://attack.mitre.org/techniques/T1053/005/
 tags:
+  - attack.execution
+  - attack.persistence
+  - attack.privilege-escalation
   - attack.t1053.005
 logsource:
   category: process_creation
