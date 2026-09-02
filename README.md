@@ -11,8 +11,6 @@
 
 Cyber-Sentinel-Forge is a practical cyber defense engineering repository focused on building reusable, testable, and production-aware defensive security content.
 
-> **Product direction:** this repository is being hardened for the planned **Cyber-Sentinel DefenseOps** identity. The GitHub repository slug will be changed separately because repository-rename metadata is not exposed by the current connector.
-
 ## Mission
 
 Turn cyber defense knowledge into engineering artifacts that can be reviewed, tested, measured, and operationalized.
