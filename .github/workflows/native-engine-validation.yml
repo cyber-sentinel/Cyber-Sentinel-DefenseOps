@@ -34,7 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Validate Zeek script with official image
+      - name: Validate Zeek script with pinned runtime
         shell: bash
         run: |
           set -euo pipefail
@@ -52,63 +52,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Install Snort 3 build dependencies
+      - name: Pull pinned Snort 3 runtime
         shell: bash
         run: |
           set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y \
-            autoconf \
-            automake \
-            build-essential \
-            cmake \
-            flex \
-            libfl-dev \
-            bison \
-            libdumbnet-dev \
-            libhwloc-dev \
-            libluajit-5.1-dev \
-            liblzma-dev \
-            libpcap-dev \
-            libpcre2-dev \
-            libssl-dev \
-            libtool \
-            pkg-config \
-            zlib1g-dev
+          docker pull openeuler/snort3:3.12.2.0-oe2403sp4
 
-      - name: Build LibDAQ 3.0.27
+      - name: Assert Snort version and validate rules
         shell: bash
         run: |
           set -euo pipefail
-          git clone --depth 1 --branch v3.0.27 https://github.com/snort3/libdaq.git /tmp/libdaq
-          cd /tmp/libdaq
-          ./bootstrap
-          ./configure --prefix=/opt/snort3
-          make -j"$(nproc)"
-          sudo make install
-
-      - name: Build Snort 3.12.2.0
-        shell: bash
-        run: |
-          set -euo pipefail
-          export PKG_CONFIG_PATH=/opt/snort3/lib/pkgconfig:${PKG_CONFIG_PATH:-}
-          git clone --depth 1 --branch 3.12.2.0 https://github.com/snort3/snort3.git /tmp/snort3-src
-          cd /tmp/snort3-src
-          ./configure_cmake.sh --prefix=/opt/snort3
-          cd build
-          cmake --build . --target snort --parallel "$(nproc)"
-
-      - name: Validate Snort 3 rules
-        shell: bash
-        run: |
-          set -euo pipefail
-          export LD_LIBRARY_PATH=/opt/snort3/lib:${LD_LIBRARY_PATH:-}
-          SNORT_BIN=/tmp/snort3-src/build/src/snort
-          SNORT_LUA=/tmp/snort3-src/lua/snort.lua
-          test -x "$SNORT_BIN"
-          test -f "$SNORT_LUA"
-          "$SNORT_BIN" -V
-          "$SNORT_BIN" \
-            -T \
-            -c "$SNORT_LUA" \
-            -R "$GITHUB_WORKSPACE/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules"
+          IMAGE=openeuler/snort3:3.12.2.0-oe2403sp4
+          docker run --rm --entrypoint sh "$IMAGE" -lc 'snort -V 2>&1 | tee /tmp/snort-version.txt; grep -F "3.12.2.0" /tmp/snort-version.txt'
+          docker run --rm \
+            --entrypoint sh \
+            -v "$PWD:/work:ro" \
+            "$IMAGE" \
+            -lc 'set -e; CFG="$(find / -type f -name snort.lua 2>/dev/null | head -n 1)"; test -n "$CFG"; snort -T -c "$CFG" -R /work/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules'
