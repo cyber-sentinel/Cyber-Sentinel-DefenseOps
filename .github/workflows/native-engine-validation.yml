@@ -22,6 +22,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: native-engine-validation-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   zeek-native:
     name: Zeek 8.0.9 native validation
@@ -92,18 +96,19 @@ jobs:
           cd /tmp/snort3-src
           ./configure_cmake.sh --prefix=/opt/snort3
           cd build
-          make -j"$(nproc)"
-          sudo make install
+          cmake --build . --target snort --parallel "$(nproc)"
 
       - name: Validate Snort 3 rules
         shell: bash
         run: |
           set -euo pipefail
           export LD_LIBRARY_PATH=/opt/snort3/lib:${LD_LIBRARY_PATH:-}
-          /opt/snort3/bin/snort -V
-          SNORT_LUA="$(find /opt/snort3 -type f -name snort.lua | head -n 1)"
-          test -n "$SNORT_LUA"
-          /opt/snort3/bin/snort \
+          SNORT_BIN=/tmp/snort3-src/build/src/snort
+          SNORT_LUA=/tmp/snort3-src/lua/snort.lua
+          test -x "$SNORT_BIN"
+          test -f "$SNORT_LUA"
+          "$SNORT_BIN" -V
+          "$SNORT_BIN" \
             -T \
             -c "$SNORT_LUA" \
             -R "$GITHUB_WORKSPACE/detections/windows/powershell-lolbins/snort3/powershell_lolbin_http.rules"
