@@ -1,0 +1,6 @@
+index=windows (EventCode=1 OR EventCode=4688)
+| eval proc=lower(coalesce(Image, New_Process_Name, process_path, process_name)), cmd=lower(coalesce(CommandLine, Process_Command_Line, process_command_line)), parent=lower(coalesce(ParentImage, InitiatingProcessFileName, parent_process_name)), user=coalesce(User, AccountName, user)
+| where (like(proc,"%\\wmic.exe")) OR (like(parent,"%\\wmiprvse.exe")) OR ((like(proc,"%\\wmic.exe")) AND (like(cmd,"%/node:%") OR like(cmd,"%process call create%") OR like(cmd,"%process %") OR like(cmd,"% call %") OR like(cmd,"% create %")))
+| eval hunt_reason=case((like(cmd,"%/node:%") OR like(cmd,"%process call create%") OR like(cmd,"%process %") OR like(cmd,"% call %") OR like(cmd,"% create %")),"suspicious_command_line",(like(parent,"%\\wmiprvse.exe")),"suspicious_parent_context",true(),"process_scope")
+| stats count as events min(_time) as first_seen max(_time) as last_seen values(hunt_reason) as reasons values(parent) as parents values(cmd) as command_lines by host user proc
+| sort - events

@@ -1,0 +1,143 @@
+{
+  "size": 500,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "process.name.keyword": "powershell.exe"
+          }
+        },
+        {
+          "term": {
+            "process.name.keyword": "pwsh.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "winword.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "excel.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "outlook.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "mshta.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "wscript.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "cscript.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "cmd.exe"
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*invoke-webrequest*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*downloadstring*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*downloadfile*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*system.net.webclient*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*start-bitstransfer*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*curl *",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*wget *",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*http://*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*https://*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

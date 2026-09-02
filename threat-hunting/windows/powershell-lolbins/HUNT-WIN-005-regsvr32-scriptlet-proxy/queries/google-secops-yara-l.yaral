@@ -1,0 +1,18 @@
+rule cs_hunt_win_005_regsvr32_scriptlet_proxy_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Regsvr32 Scriptlet / COM Proxy Execution — broad hunt-compatible event filter"
+    mitre_attack = "T1218.010"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:regsvr32(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:scrobj\.dll|/i:|-i:|/u |http://|https://|\.sct|\\appdata\\|\\temp\\)`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:winword(?:\.exe)?|excel(?:\.exe)?|outlook(?:\.exe)?|mshta(?:\.exe)?|wscript(?:\.exe)?|cscript(?:\.exe)?|powershell(?:\.exe)?|cmd(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

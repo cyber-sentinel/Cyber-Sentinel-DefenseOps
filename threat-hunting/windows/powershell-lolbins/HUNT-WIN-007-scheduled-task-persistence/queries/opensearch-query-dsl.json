@@ -1,0 +1,149 @@
+{
+  "size": 500,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "process.name.keyword": "schtasks.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "cmd.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "powershell.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "wmic.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "psexec.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "psexesvc.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "services.exe"
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*/create*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*/change*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*/s *",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*powershell*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*pwsh*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*cmd /c*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*mshta*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*rundll32*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*regsvr32*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*\\\\appdata\\\\*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*\\\\temp\\\\*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

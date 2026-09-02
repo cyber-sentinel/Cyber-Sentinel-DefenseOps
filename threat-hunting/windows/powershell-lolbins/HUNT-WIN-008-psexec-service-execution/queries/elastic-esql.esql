@@ -1,0 +1,7 @@
+// Elastic ES|QL — hunt-oriented ECS process query.
+// Adjust data stream patterns and field availability for the target deployment.
+FROM logs-endpoint.events.process-*
+| WHERE process.name IN ("psexec.exe", "psexec64.exe", "psexesvc.exe") OR process.parent.name IN ("services.exe")
+| WHERE process.command_line LIKE "*psexec*" OR process.command_line LIKE "*psexesvc*" OR process.command_line LIKE "*cmd.exe*" OR process.command_line LIKE "*powershell.exe*" OR process.command_line LIKE "*pwsh.exe*" OR process.command_line LIKE "*\\admin$*" OR process.command_line LIKE "*\\ipc$*" OR process.parent.name IN ("services.exe")
+| KEEP @timestamp, host.name, user.name, process.name, process.command_line, process.parent.name, process.parent.command_line
+| SORT @timestamp DESC

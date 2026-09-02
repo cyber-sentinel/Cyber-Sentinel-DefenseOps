@@ -1,0 +1,1 @@
+process where (process.name in ("wmic.exe") or process.parent.name in ("wmiprvse.exe")) and (process.command_line : ("*/node:*", "*process call create*", "*process *", "* call *", "* create *") or process.parent.name in ("wmiprvse.exe"))

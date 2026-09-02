@@ -1,0 +1,6 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine), Parent=tolower(InitiatingProcessFileName)
+| where Proc in ("wmic.exe") or Parent in ("wmiprvse.exe") or (Proc in ("wmic.exe") and Cmd has_any ("/node:","process call create","process "," call "," create "))
+| extend HuntReason=case(Cmd has_any ("/node:","process call create","process "," call "," create "), "suspicious_command_line", Parent in ("wmiprvse.exe"), "suspicious_parent_context", "process_scope")
+| project Timestamp, DeviceId, DeviceName, ReportId, ProcessUniqueId, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, HuntReason
+| order by Timestamp desc

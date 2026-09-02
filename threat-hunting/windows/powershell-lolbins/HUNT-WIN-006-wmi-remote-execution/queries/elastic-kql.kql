@@ -1,0 +1,1 @@
+(process.name: ("wmic.exe") or process.parent.name: ("wmiprvse.exe")) and (process.command_line: ("*/node:*" or "*process call create*" or "*process *" or "* call *" or "* create *") or process.parent.name: ("wmiprvse.exe"))

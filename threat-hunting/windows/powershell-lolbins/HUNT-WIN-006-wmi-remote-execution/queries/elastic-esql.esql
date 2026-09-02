@@ -1,0 +1,7 @@
+// Elastic ES|QL — hunt-oriented ECS process query.
+// Adjust data stream patterns and field availability for the target deployment.
+FROM logs-endpoint.events.process-*
+| WHERE process.name IN ("wmic.exe") OR process.parent.name IN ("wmiprvse.exe")
+| WHERE process.command_line LIKE "*/node:*" OR process.command_line LIKE "*process call create*" OR process.command_line LIKE "*process *" OR process.command_line LIKE "* call *" OR process.command_line LIKE "* create *" OR process.parent.name IN ("wmiprvse.exe")
+| KEEP @timestamp, host.name, user.name, process.name, process.command_line, process.parent.name, process.parent.command_line
+| SORT @timestamp DESC

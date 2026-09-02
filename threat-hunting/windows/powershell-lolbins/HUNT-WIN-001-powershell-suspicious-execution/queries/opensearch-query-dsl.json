@@ -1,0 +1,179 @@
+{
+  "size": 500,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "process.name.keyword": "powershell.exe"
+          }
+        },
+        {
+          "term": {
+            "process.name.keyword": "pwsh.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "winword.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "excel.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "outlook.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "powerpnt.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "mshta.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "wscript.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "cscript.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "rundll32.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "chrome.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "msedge.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "firefox.exe"
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*-encodedcommand*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "* -enc *",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*executionpolicy bypass*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*windowstyle hidden*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*invoke-webrequest*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*downloadstring*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*downloadfile*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*webclient*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*start-bitstransfer*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*invoke-expression*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "* iex *",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

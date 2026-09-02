@@ -1,0 +1,6 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine), Parent=tolower(InitiatingProcessFileName)
+| where Proc in ("psexec.exe","psexec64.exe","psexesvc.exe") or Parent in ("services.exe") or (Proc in ("psexec.exe","psexec64.exe","psexesvc.exe") and Cmd has_any ("psexec","psexesvc","cmd.exe","powershell.exe","pwsh.exe","\admin$","\ipc$"))
+| extend HuntReason=case(Cmd has_any ("psexec","psexesvc","cmd.exe","powershell.exe","pwsh.exe","\admin$","\ipc$"), "suspicious_command_line", Parent in ("services.exe"), "suspicious_parent_context", "process_scope")
+| project Timestamp, DeviceId, DeviceName, ReportId, ProcessUniqueId, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, HuntReason
+| order by Timestamp desc

@@ -1,0 +1,18 @@
+rule cs_hunt_win_007_scheduled_task_persistence_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Scheduled Task Persistence & Remote Task Execution — broad hunt-compatible event filter"
+    mitre_attack = "T1053.005"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:schtasks(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:/create|/change|/s |powershell|pwsh|cmd /c|mshta|rundll32|regsvr32|\\appdata\\|\\temp\\)`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:cmd(?:\.exe)?|powershell(?:\.exe)?|wmic(?:\.exe)?|psexec(?:\.exe)?|psexesvc(?:\.exe)?|services(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

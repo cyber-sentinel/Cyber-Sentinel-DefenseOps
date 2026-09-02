@@ -1,0 +1,102 @@
+{
+  "size": 500,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "process.name.keyword": "psexec.exe"
+          }
+        },
+        {
+          "term": {
+            "process.name.keyword": "psexec64.exe"
+          }
+        },
+        {
+          "term": {
+            "process.name.keyword": "psexesvc.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "services.exe"
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*psexec*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*psexesvc*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*cmd.exe*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*powershell.exe*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*pwsh.exe*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*\\\\admin$*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*\\\\ipc$*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

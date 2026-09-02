@@ -1,0 +1,1 @@
+(process.name: ("psexec.exe" or "psexec64.exe" or "psexesvc.exe") or process.parent.name: ("services.exe")) and (process.command_line: ("*psexec*" or "*psexesvc*" or "*cmd.exe*" or "*powershell.exe*" or "*pwsh.exe*" or "*\\admin$*" or "*\\ipc$*") or process.parent.name: ("services.exe"))

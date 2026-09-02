@@ -1,0 +1,5 @@
+// SentinelOne Singularity Data Lake PowerQuery — hunt template.
+// Tenant schemas/features can vary; validate fields before production use.
+dataSource.name='SentinelOne' AND endpoint.os='windows' AND event.type='Process Creation'
+AND (tgt.process.name in:anycase ('mshta.exe') OR src.process.name in:anycase ('winword.exe','excel.exe','outlook.exe','powerpnt.exe','chrome.exe','msedge.exe','firefox.exe','wscript.exe','cscript.exe') OR tgt.process.cmdline contains:anycase ('http://','https://','javascript:','vbscript:','.hta','.sct'))
+| columns event.time, endpoint.name, src.process.user, src.process.name, src.process.cmdline, tgt.process.name, tgt.process.cmdline, src.process.parent.name

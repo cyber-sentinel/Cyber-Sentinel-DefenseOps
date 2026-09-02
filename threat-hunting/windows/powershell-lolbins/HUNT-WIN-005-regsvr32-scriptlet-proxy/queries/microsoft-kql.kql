@@ -1,0 +1,6 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine), Parent=tolower(InitiatingProcessFileName)
+| where Proc in ("regsvr32.exe") or Parent in ("winword.exe","excel.exe","outlook.exe","mshta.exe","wscript.exe","cscript.exe","powershell.exe","cmd.exe") or (Proc in ("regsvr32.exe") and Cmd has_any ("scrobj.dll","/i:","-i:","/u ","http://","https://",".sct","\appdata\","\temp\"))
+| extend HuntReason=case(Cmd has_any ("scrobj.dll","/i:","-i:","/u ","http://","https://",".sct","\appdata\","\temp\"), "suspicious_command_line", Parent in ("winword.exe","excel.exe","outlook.exe","mshta.exe","wscript.exe","cscript.exe","powershell.exe","cmd.exe"), "suspicious_parent_context", "process_scope")
+| project Timestamp, DeviceId, DeviceName, ReportId, ProcessUniqueId, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, HuntReason
+| order by Timestamp desc

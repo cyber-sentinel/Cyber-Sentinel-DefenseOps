@@ -1,0 +1,18 @@
+rule cs_hunt_win_002_powershell_network_retrieval_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "PowerShell Network Retrieval & Follow-on Execution — broad hunt-compatible event filter"
+    mitre_attack = "T1059.001"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:powershell(?:\.exe)?|pwsh(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:invoke-webrequest|downloadstring|downloadfile|system\.net\.webclient|start-bitstransfer|curl |wget |http://|https://)`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:winword(?:\.exe)?|excel(?:\.exe)?|outlook(?:\.exe)?|mshta(?:\.exe)?|wscript(?:\.exe)?|cscript(?:\.exe)?|cmd(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

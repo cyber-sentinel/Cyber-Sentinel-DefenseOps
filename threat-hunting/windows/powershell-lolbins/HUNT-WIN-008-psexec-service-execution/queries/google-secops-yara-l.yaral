@@ -1,0 +1,18 @@
+rule cs_hunt_win_008_psexec_service_execution_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "PsExec / Service-Based Remote Execution — broad hunt-compatible event filter"
+    mitre_attack = "T1569.002"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:psexec(?:\.exe)?|psexec64(?:\.exe)?|psexesvc(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:psexec|psexesvc|cmd\.exe|powershell\.exe|pwsh\.exe|\\admin\$|\\ipc\$)`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:services(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

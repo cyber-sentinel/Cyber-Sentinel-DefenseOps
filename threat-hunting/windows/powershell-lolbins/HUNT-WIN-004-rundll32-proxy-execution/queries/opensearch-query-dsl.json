@@ -1,0 +1,148 @@
+{
+  "size": 500,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "process.name.keyword": "rundll32.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "winword.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "excel.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "outlook.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "powerpnt.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "mshta.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "wscript.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "cscript.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "cmd.exe"
+          }
+        },
+        {
+          "term": {
+            "process.parent.name.keyword": "powershell.exe"
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*javascript:*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*vbscript:*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*http://*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*https://*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*\\\\appdata\\\\*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*\\\\temp\\\\*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*,#*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*control_rundll*",
+              "case_insensitive": true
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "process.command_line.keyword": {
+              "value": "*mshtml*",
+              "case_insensitive": true
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": [
+    "@timestamp",
+    "host.name",
+    "user.name",
+    "process.name",
+    "process.command_line",
+    "process.parent.name",
+    "process.parent.command_line"
+  ]
+}

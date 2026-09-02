@@ -1,0 +1,6 @@
+DeviceProcessEvents
+| extend Proc=tolower(FileName), Cmd=tolower(ProcessCommandLine), Parent=tolower(InitiatingProcessFileName)
+| where Proc in ("powershell.exe","pwsh.exe") or Parent in ("winword.exe","excel.exe","outlook.exe","mshta.exe","wscript.exe","cscript.exe","cmd.exe") or (Proc in ("powershell.exe","pwsh.exe") and Cmd has_any ("invoke-webrequest","downloadstring","downloadfile","system.net.webclient","start-bitstransfer","curl ","wget ","http://","https://"))
+| extend HuntReason=case(Cmd has_any ("invoke-webrequest","downloadstring","downloadfile","system.net.webclient","start-bitstransfer","curl ","wget ","http://","https://"), "suspicious_command_line", Parent in ("winword.exe","excel.exe","outlook.exe","mshta.exe","wscript.exe","cscript.exe","cmd.exe"), "suspicious_parent_context", "process_scope")
+| project Timestamp, DeviceId, DeviceName, ReportId, ProcessUniqueId, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine, HuntReason
+| order by Timestamp desc

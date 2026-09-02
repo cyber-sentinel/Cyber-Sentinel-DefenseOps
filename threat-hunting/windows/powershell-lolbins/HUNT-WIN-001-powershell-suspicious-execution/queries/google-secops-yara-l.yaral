@@ -1,0 +1,18 @@
+rule cs_hunt_win_001_powershell_suspicious_execution_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "PowerShell Suspicious Execution & Post-Execution Activity — broad hunt-compatible event filter"
+    mitre_attack = "T1059.001"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:powershell(?:\.exe)?|pwsh(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:-encodedcommand| -enc |executionpolicy bypass|windowstyle hidden|invoke-webrequest|downloadstring|downloadfile|webclient|start-bitstransfer|invoke-expression| iex )`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:winword(?:\.exe)?|excel(?:\.exe)?|outlook(?:\.exe)?|powerpnt(?:\.exe)?|mshta(?:\.exe)?|wscript(?:\.exe)?|cscript(?:\.exe)?|rundll32(?:\.exe)?|chrome(?:\.exe)?|msedge(?:\.exe)?|firefox(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

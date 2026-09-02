@@ -1,0 +1,7 @@
+// Elastic ES|QL — hunt-oriented ECS process query.
+// Adjust data stream patterns and field availability for the target deployment.
+FROM logs-endpoint.events.process-*
+| WHERE process.name IN ("regsvr32.exe") OR process.parent.name IN ("winword.exe", "excel.exe", "outlook.exe", "mshta.exe", "wscript.exe", "cscript.exe", "powershell.exe", "cmd.exe")
+| WHERE process.command_line LIKE "*scrobj.dll*" OR process.command_line LIKE "*/i:*" OR process.command_line LIKE "*-i:*" OR process.command_line LIKE "*/u *" OR process.command_line LIKE "*http://*" OR process.command_line LIKE "*https://*" OR process.command_line LIKE "*.sct*" OR process.command_line LIKE "*\\appdata\\*" OR process.command_line LIKE "*\\temp\\*" OR process.parent.name IN ("winword.exe", "excel.exe", "outlook.exe", "mshta.exe", "wscript.exe", "cscript.exe", "powershell.exe", "cmd.exe")
+| KEEP @timestamp, host.name, user.name, process.name, process.command_line, process.parent.name, process.parent.command_line
+| SORT @timestamp DESC

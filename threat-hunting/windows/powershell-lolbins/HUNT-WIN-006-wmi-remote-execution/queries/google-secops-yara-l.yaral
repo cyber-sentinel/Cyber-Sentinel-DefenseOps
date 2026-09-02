@@ -1,0 +1,18 @@
+rule cs_hunt_win_006_wmi_remote_execution_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "WMI / WMIC Remote Process Execution — broad hunt-compatible event filter"
+    mitre_attack = "T1047"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:wmic(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:/node:|process call create|process | call | create )`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:wmiprvse(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

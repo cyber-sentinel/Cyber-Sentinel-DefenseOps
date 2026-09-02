@@ -1,0 +1,18 @@
+rule cs_hunt_win_004_rundll32_proxy_execution_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Rundll32 Proxy Execution & Suspicious DLL Invocation — broad hunt-compatible event filter"
+    mitre_attack = "T1218.011"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:rundll32(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:javascript:|vbscript:|http://|https://|\\appdata\\|\\temp\\|,#|control_rundll|mshtml)`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:winword(?:\.exe)?|excel(?:\.exe)?|outlook(?:\.exe)?|powerpnt(?:\.exe)?|mshta(?:\.exe)?|wscript(?:\.exe)?|cscript(?:\.exe)?|cmd(?:\.exe)?|powershell(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

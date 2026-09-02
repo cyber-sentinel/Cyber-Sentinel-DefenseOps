@@ -1,0 +1,1 @@
+process where (process.name in ("psexec.exe", "psexec64.exe", "psexesvc.exe") or process.parent.name in ("services.exe")) and (process.command_line : ("*psexec*", "*psexesvc*", "*cmd.exe*", "*powershell.exe*", "*pwsh.exe*", "*\\admin$*", "*\\ipc$*") or process.parent.name in ("services.exe"))

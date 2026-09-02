@@ -1,0 +1,18 @@
+rule cs_hunt_win_003_mshta_proxy_execution_hunt {
+  meta:
+    author = "Ali RahimDabagh (Cyber-Sentinel)"
+    description = "Mshta Trusted Binary Proxy Execution — broad hunt-compatible event filter"
+    mitre_attack = "T1218.005"
+    yara_version = "YL2.0"
+
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    (
+      re.regex($e.principal.process.command_line, `(?:mshta(?:\.exe)?)`) nocase or
+      re.regex($e.principal.process.command_line, `(?:http://|https://|javascript:|vbscript:|\.hta|\.sct)`) nocase or
+      re.regex($e.principal.process.parent_process.command_line, `(?:winword(?:\.exe)?|excel(?:\.exe)?|outlook(?:\.exe)?|powerpnt(?:\.exe)?|chrome(?:\.exe)?|msedge(?:\.exe)?|firefox(?:\.exe)?|wscript(?:\.exe)?|cscript(?:\.exe)?)`) nocase
+    )
+
+  condition:
+    $e
+}

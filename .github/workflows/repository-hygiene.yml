@@ -28,9 +28,13 @@ jobs:
         shell: bash
         run: python -m pip install --disable-pip-version-check pyyaml
 
-      - name: Validate Sigma detection packs
+      - name: Validate detection packs
         shell: bash
         run: python tools/validate_detection_pack.py
+
+      - name: Validate threat hunting packs
+        shell: bash
+        run: python tools/validate_hunt_pack.py
 
       - name: Validate text files
         shell: bash
@@ -38,15 +42,14 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           bad = []
+          checked = {'.md','.yaml','.yml','.json','.py','.ps1','.sh','.spl','.kql','.eql','.esql','.cql','.powerquery','.yaral','.yar','.rules','.zeek','.xml'}
           for p in Path('.').rglob('*'):
-              if p.is_file() and '.git' not in p.parts and p.suffix.lower() in {'.md','.yaml','.yml','.json','.py','.ps1','.sh'}:
+              if p.is_file() and '.git' not in p.parts and p.suffix.lower() in checked:
                   try:
                       t = p.read_text(encoding='utf-8')
                   except UnicodeDecodeError:
                       bad.append(f"{p}: not UTF-8")
                       continue
-                  if '\r\n' in t:
-                      pass
                   for i, line in enumerate(t.splitlines(), 1):
                       if line.rstrip() != line:
                           bad.append(f"{p}:{i}: trailing whitespace")
