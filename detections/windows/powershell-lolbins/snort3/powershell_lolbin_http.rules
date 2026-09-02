@@ -1,5 +1,5 @@
 # Snort 3 network adjunct detections.
-// Requires HTTP visibility; these do not replace endpoint process detections.
+# Requires HTTP visibility; these do not replace endpoint process detections.
 
 alert http $HOME_NET any -> $EXTERNAL_NET any (
     msg:"CS DET-WIN-002 Potential PowerShell HTTP User-Agent";
