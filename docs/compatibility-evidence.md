@@ -2,11 +2,11 @@
 
 This file records the concrete engine/runtime versions used to validate Cyber-Sentinel-DefenseOps artifacts.
 
-## Release Candidate Baseline
+## v0.1.0 Stable Validation Baseline
 
 | Component | Version / Channel | Validation |
 |---|---|---|
-| Snort 3 | 3.12.2.0 | Version-pinned native `snort -T` validation in `openeuler/snort3:3.12.2.0-oe2403sp4`; runtime version is asserted in CI |
+| Snort 3 | 3.12.2.0 / LibDAQ 3.0.27 | Version-pinned native `snort -T` validation in `openeuler/snort3:3.12.2.0-oe2403sp4`; runtime version is asserted and DAQ module path is explicitly resolved in CI |
 | Zeek | 8.0.9 | Native script load/compile using pinned `zeek/zeek:8.0.9` image |
 | Suricata | Ubuntu 24.04 packaged runtime | Native `suricata -T` validation |
 | YARA | Ubuntu 24.04 packaged runtime | Native `yarac` compilation |
