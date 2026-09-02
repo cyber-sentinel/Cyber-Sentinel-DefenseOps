@@ -1,0 +1,9 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\wbem\\wmic.exe",
+    "CommandLine": "wmic.exe /node:LAB-02 process call create \"cmd.exe /c echo test\"",
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "LAB\\admin",
+    "Computer": "LAB-01"
+  }
+]

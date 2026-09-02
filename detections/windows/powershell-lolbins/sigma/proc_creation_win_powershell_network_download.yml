@@ -4,9 +4,8 @@ status: experimental
 description: Detects PowerShell command lines containing common network retrieval primitives that warrant investigation.
 author: Ali RahimDabagh (Cyber-Sentinel)
 date: 2026-09-02
-references:
-  - https://attack.mitre.org/techniques/T1059/001/
 tags:
+  - attack.execution
   - attack.t1059.001
 logsource:
   category: process_creation

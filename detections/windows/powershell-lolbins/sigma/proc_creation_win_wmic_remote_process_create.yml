@@ -4,9 +4,8 @@ status: experimental
 description: Detects wmic.exe using a remote node with process call create.
 author: Ali RahimDabagh (Cyber-Sentinel)
 date: 2026-09-02
-references:
-  - https://attack.mitre.org/techniques/T1047/
 tags:
+  - attack.execution
   - attack.t1047
 logsource:
   category: process_creation
