@@ -1,6 +1,6 @@
 # Cyber-Sentinel-DefenseOps
 
-**Open Cyber Defense Operations Engineering**
+**Open Cyber Defense Operations Engineering — DEFEND**
 
 [![Repository Hygiene](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml/badge.svg)](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml)
 ![Stable Release](https://img.shields.io/badge/release-v0.1.0-success)
@@ -9,21 +9,95 @@
 
 [Cyber-Sentinel Profile](https://github.com/cyber-sentinel)
 
-Cyber-Sentinel-DefenseOps is the open engineering core of the Cyber-Sentinel ecosystem, focused on reusable, testable, production-aware detections, hunts, validation assets, response content, and defensive automation.
+Cyber-Sentinel-DefenseOps is the **DEFEND** layer of the Cyber-Sentinel ecosystem: a defensive-engineering repository focused on reusable, testable, production-aware detections, threat hunts, validation assets, response engineering, DFIR/IR material, deception-oriented content, and defensive automation.
+
+> **Repository visibility:** Private during active development. The word “Open” describes the vendor-neutral engineering approach; repository visibility alone does not grant a public license.
 
 ## Mission
 
-Turn cyber defense knowledge into engineering artifacts that can be reviewed, tested, measured, automated, and operationalized.
+Turn cyber-defense knowledge into engineering artifacts that can be reviewed, tested, measured, validated, automated, and operated in real environments.
 
-## Ecosystem Position
+**Core question:** *What can we detect, validate, hunt, and defend?*
+
+## Product Position
+
+DefenseOps is **not**:
+
+- the canonical knowledge graph or analyst knowledge platform — that is Atlas;
+- the repository for reusable operational procedures and playbooks — that is Skills;
+- a dump of unvalidated detection rules;
+- a SIEM-specific content collection;
+- a claim that CI-green content is automatically production-safe everywhere.
+
+DefenseOps owns the engineering lifecycle around defensive content: telemetry requirements, detection logic, hunting logic, validation evidence, response engineering, production constraints, rollback, reproducibility, and measurement.
+
+## Cyber-Sentinel Ecosystem
+
+Cyber-Sentinel is intentionally a **contract-separated ecosystem** with three current project layers:
 
 ```text
 Cyber-Sentinel
-├── DefenseOps  → open defensive engineering content, validation, hunts, detections and automation
-└── Atlas       → planned global cyber defense intelligence, search and analyst platform
+├── Atlas       — KNOW   → Connect • Search • Investigate • Explain
+├── DefenseOps  — DEFEND → Detect • Hunt • Validate • Respond • Automate
+└── Skills      — APPLY  → Execute • Review • Reuse • Govern
 ```
 
-DefenseOps is intentionally content- and engineering-first. Cyber-Sentinel-Atlas will consume curated DefenseOps knowledge through web, offline, API, and CLI interfaces rather than duplicating it.
+### Atlas — KNOW
+
+[Cyber-Sentinel-Atlas](https://github.com/cyber-sentinel/Cyber-Sentinel-Atlas) owns governed cyber-defense knowledge, canonical relationships, deterministic retrieval, provenance, investigation context, offline knowledge delivery, and analyst-facing product interfaces.
+
+DefenseOps can provide controlled defensive content to Atlas, but repository origin alone never grants canonical authority. Atlas applies its own ingestion, provenance, licensing, validation, promotion, and release boundaries before any DefenseOps-derived content becomes trusted Atlas knowledge.
+
+### DefenseOps — DEFEND
+
+DefenseOps owns defensive engineering artifacts and their validation lifecycle:
+
+- detections and detection packs;
+- threat-hunting content;
+- validation assets and synthetic fixtures;
+- response engineering;
+- DFIR/IR engineering material;
+- cyber-deception content;
+- security automation;
+- engine-aware implementation guidance;
+- production constraints, rollback, and measurement.
+
+### Skills — APPLY
+
+[Cyber-Sentinel-Skills](https://github.com/cyber-sentinel/Cyber-Sentinel-Skills) owns reusable, vendor-neutral operational procedures and playbooks for humans and AI agents.
+
+Skills may operationalize DefenseOps artifacts as repeatable procedures, but it does not replace the underlying detection, hunt, validation, or response engineering owned here.
+
+### Ecosystem Operating Loop
+
+```text
+Authoritative Sources / Telemetry / Security Knowledge
+                         │
+                         ▼
+                  ATLAS — KNOW
+        Connect • Search • Investigate • Explain
+                         │
+             evidence / defensive context
+                         ▼
+               DefenseOps — DEFEND
+       Detect • Hunt • Validate • Respond • Automate
+                         │
+              repeatable operating method
+                         ▼
+                  Skills — APPLY
+          Execute • Review • Reuse • Govern
+                         │
+                         ▼
+          VALIDATE → AUTOMATE → EVOLVE
+                         │
+                         └──────────────↺
+                    feedback into knowledge,
+                 engineering and procedures
+```
+
+`VALIDATE`, `AUTOMATE`, and `EVOLVE` are operating outcomes and feedback stages, not separate repositories.
+
+`KNOW → DEFEND → APPLY → VALIDATE → AUTOMATE → EVOLVE`
 
 ## Current Stable Release
 
@@ -102,7 +176,11 @@ Every substantive artifact should document:
 
 ## Content Lifecycle
 
-`Design → Review → Test → Validate → Deploy → Measure → Tune → Retire`
+```text
+Design → Review → Test → Validate → Deploy → Measure → Tune → Retire
+```
+
+The lifecycle is evidence-driven. A rule or query becoming syntactically valid is not equivalent to production validation.
 
 ## Safety
 
@@ -112,6 +190,6 @@ Do not deploy untested content directly to production environments.
 
 ---
 
-**Maintainer:** Ali RahimDabagh
-**Profile:** `cyber-sentinel`
+**Maintainer:** Ali RahimDabagh  
+**Profile:** `cyber-sentinel`  
 **Focus:** Information Security Management & Cyber Defense Architecture
