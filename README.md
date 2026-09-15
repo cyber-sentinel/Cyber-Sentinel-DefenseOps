@@ -190,6 +190,8 @@ Do not deploy untested content directly to production environments.
 
 ---
 
-**Maintainer:** Ali RahimDabagh  
-**Profile:** `cyber-sentinel`  
+**Maintainer:** Ali RahimDabagh
+
+**Profile:** `cyber-sentinel`
+
 **Focus:** Information Security Management & Cyber Defense Architecture
