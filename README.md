@@ -235,7 +235,10 @@ The objective is a defensible engineering system that can support enterprise sec
 
 ---
 
-**Maintainer:** Ali RahimDabagh  
-**Profile:** `cyber-sentinel`  
-**Ecosystem role:** `DEFEND`  
+**Maintainer:** Ali RahimDabagh
+
+**Profile:** `cyber-sentinel`
+
+**Ecosystem role:** `DEFEND`
+
 **Focus:** Security Leadership • Cyber Defense Architecture • Detection Engineering • Threat Hunting • DFIR • Defensive Automation
