@@ -14,10 +14,10 @@ Cyber-Sentinel-DefenseOps is the **DEFEND** layer of the Cyber-Sentinel ecosyste
 It is designed for security teams that need defensive content to be **reviewable, testable, evidence-backed, engine-aware, production-conscious, and reusable** rather than accumulated as isolated rule files.
 
 > **Current maturity:** Stable baseline `v0.1.0`
-> **Repository visibility:** Private during active development
+> **Repository visibility:** Public source repository
 > **Primary audience:** SOC, Detection Engineering, Threat Hunting, DFIR/IR, Security Engineering, Purple Team, and security platform teams
 > **Operating posture:** Defensive use, controlled validation, explicit production constraints
-> **Licensing note:** Repository visibility does not itself grant public reuse or redistribution rights
+> **Licensing note:** No project `LICENSE` is currently published; public visibility does not grant reuse or redistribution rights
 
 ## Why DefenseOps Exists
 
@@ -220,6 +220,12 @@ Before production deployment:
 - use normal organizational change control.
 
 Do not treat repository content as automatic authorization to make production changes.
+
+## Public Source & Licensing Boundary
+
+DefenseOps is publicly visible source code and security-engineering content. Public visibility improves inspectability and collaboration, but it is not itself a license grant.
+
+Until a project `LICENSE` is explicitly published and applicable third-party rights are clear, reuse, redistribution, repackaging, and commercial incorporation should be treated conservatively and assessed independently.
 
 ## Product Direction
 
