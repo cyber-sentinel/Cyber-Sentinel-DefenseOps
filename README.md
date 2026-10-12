@@ -1,240 +1,206 @@
-# Cyber-Sentinel-DefenseOps
+<h1 align="center">Cyber-Sentinel DefenseOps</h1>
+<p align="center"><strong>Evidence-Driven Cyber Defense Engineering</strong></p>
+<p align="center">DEFEND • DETECT • HUNT • VALIDATE • RESPOND • AUTOMATE</p>
 
-**Evidence-Driven Cyber Defense Engineering — DEFEND**
+<p align="center">
+  <a href="https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml"><img alt="Repository Hygiene" src="https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml/badge.svg"></a>
+  <img alt="Engineering Baseline" src="https://img.shields.io/badge/engineering%20baseline-0.1.0-success">
+  <img alt="ATT&CK Mapped" src="https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-informational">
+  <img alt="Multi Engine" src="https://img.shields.io/badge/detection-multi--engine-blueviolet">
+  <img alt="Evidence Driven" src="https://img.shields.io/badge/validation-evidence--driven-0f766e">
+</p>
 
-[![Repository Hygiene](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml/badge.svg)](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/workflows/repository-hygiene.yml)
-![Engineering Baseline](https://img.shields.io/badge/engineering%20baseline-0.1.0-success)
-![ATT&CK Mapped](https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-informational)
-![Multi-Engine](https://img.shields.io/badge/detection-multi--engine-informational)
+DefenseOps is the **DEFEND** layer of the Cyber-Sentinel ecosystem: a production-aware engineering system for building, validating, operating, and improving detections, threat hunts, DFIR/IR content, response engineering, deception-oriented controls, and security automation.
 
-[Cyber-Sentinel Ecosystem](https://github.com/cyber-sentinel)
+> **Core question:** **What can we detect, hunt, validate, and defend — and what evidence supports that claim?**
 
-Cyber-Sentinel-DefenseOps is the **DEFEND** layer of the Cyber-Sentinel ecosystem: a production-aware defensive engineering repository for building, validating, operating, and improving detections, threat hunts, response content, DFIR/IR engineering material, deception-oriented controls, and security automation.
+DefenseOps is deliberately not a rule dump. Defensive content is treated as an engineering artifact with explicit telemetry requirements, backend identity, validation evidence, limitations, tuning considerations, and rollback boundaries.
 
-DefenseOps is designed for security organizations that need defensive content to be **reviewable, testable, evidence-backed, engine-aware, rollback-conscious, and operationally reusable** rather than accumulated as isolated rules or undocumented analyst knowledge.
+## Current State
 
-> **Current maturity:** Stable engineering baseline `0.1.0` documented in the repository; no GitHub Release/tag is currently published
-> **Repository visibility:** Public source repository
-> **Primary audience:** SOC, Detection Engineering, Threat Hunting, DFIR/IR, Security Engineering, Purple Team, and security platform teams
-> **Operating posture:** Defensive use, controlled validation, explicit production constraints
-> **Licensing note:** No project `LICENSE` is currently published; public visibility does not grant reuse or redistribution rights
+| Boundary | State |
+| --- | --- |
+| Engineering baseline | **`0.1.0` — stable repository baseline** |
+| GitHub Release / tag | **Not published** |
+| Detection model | Multi-engine / backend-explicit |
+| Validation posture | Syntax + native-engine checks + synthetic behavior evidence where applicable |
+| Primary use | Authorized defensive engineering, hunting, DFIR/IR, validation, automation |
+| Public production certification | **Not claimed** |
+| Project license | **Not currently published** |
 
-## Commercial Positioning
-
-DefenseOps addresses a common enterprise security problem: defensive logic is often easy to collect but difficult to trust operationally. A rule may be syntactically valid while still depending on unavailable telemetry, incorrect field mappings, unsupported engine behavior, unacceptable false-positive rates, or missing rollback procedures.
-
-The product therefore treats defensive content as an **engineering lifecycle** with measurable evidence and explicit deployment boundaries.
-
-For security leaders and platform owners, the intended value is:
-
-- improved consistency across detection and hunting engineering;
-- reduced ambiguity around telemetry and engine prerequisites;
-- stronger reviewability and change-control readiness;
-- explicit validation maturity rather than binary “works / does not work” claims;
-- reusable defensive content across multiple security technologies;
-- clearer handoff between research, engineering, SOC operations, and incident response;
-- an auditable basis for automation and continuous defensive improvement.
-
-**Core question:** *What can we detect, validate, hunt, and defend — and what evidence supports that claim?*
+A passing CI check is evidence that a defined repository contract passed. It is **not** automatic authorization to deploy content into every tenant, sensor, endpoint, or production environment.
 
 ## What DefenseOps Owns
 
-DefenseOps owns the engineering lifecycle around:
+| Domain | Engineering responsibility |
+| --- | --- |
+| **Detection Engineering** | rules, queries, packs, metadata, telemetry prerequisites, tuning and validation |
+| **Threat Hunting** | hypotheses, hunt queries, pivots, evidence requirements, Hunt → Detection feedback |
+| **DFIR / IR Engineering** | investigation and response-oriented engineering material |
+| **Validation** | positive/negative fixtures, conformance checks, engine-aware testing, maturity evidence |
+| **Response Engineering** | bounded defensive actions, dependencies, rollback and operational constraints |
+| **Deception** | deception-oriented defensive assets and validation context |
+| **Automation** | traceable defensive workflows with explicit decision and rollback boundaries |
 
-- **detections** and detection packs;
-- **threat hunts** and investigation queries;
-- **validation assets**, fixtures, and conformance evidence;
-- **response engineering** and operational control content;
-- **DFIR/IR engineering material**;
-- **cyber-deception content**;
-- **security automation** and defensive workflow assets;
-- **engine-aware implementation guidance**;
-- **production constraints, tuning, rollback, reproducibility, and measurement**.
+DefenseOps does **not** own ATLAS canonical knowledge or Skills operational-procedure authority.
 
-DefenseOps is **not**:
+## Engineering Lifecycle
 
-- the canonical cyber-defense knowledge graph or analyst investigation platform — that is ATLAS;
-- the repository for reusable operating procedures and governed playbooks — that is Skills;
-- an unvalidated rule dump;
-- a claim that CI-green content is automatically production-safe in every environment;
-- a replacement for tenant-specific telemetry validation, change control, or analyst judgment.
+```text
+Threat / Behavior / Defensive Need
+              ↓
+           Design
+              ↓
+           Review
+              ↓
+            Test
+              ↓
+          Validate
+              ↓
+           Deploy
+              ↓
+          Measure
+              ↓
+            Tune
+              ↓
+           Retire
+              ↺
+```
 
-## Engineering Baseline 0.1.0
+The lifecycle is evidence-driven. Syntactic validity, behavioral validation, and production approval are separate states.
 
-The repository changelog records `0.1.0` as the current stable engineering baseline. The baseline is supported by repository quality gates, but it is **not currently published as a GitHub Release or tag**.
+## Detection & Hunting Coverage
 
-Validated baseline capabilities include:
+### Windows PowerShell & LOLBins Detection Pack
 
-- native Sigma validation with Sigma CLI;
-- native YARA compilation with `yarac`;
-- native Suricata configuration/rule validation;
-- native Snort `3.12.2.0` rule validation;
-- native Zeek `8.0.9` script validation;
-- positive and negative synthetic detection fixtures;
-- explicit engine-validation maturity levels;
-- CI enforcement for detection and hunting packs.
+[`detections/windows/powershell-lolbins/`](./detections/windows/powershell-lolbins/)
 
-Reference documentation:
+Multi-engine defensive coverage includes, where technically applicable:
+
+`Sigma` • `Splunk SPL` • `Microsoft KQL` • `Microsoft Defender XDR` • `Elastic KQL/EQL/ES|QL` • `OpenSearch Query DSL` • `CrowdStrike Falcon LogScale CQL` • `SentinelOne` • `Wazuh XML` • `Google SecOps YARA-L` • `YARA` • `Suricata` • `Snort 3` • `Zeek`
+
+### Windows PowerShell & LOLBins Threat Hunting Pack
+
+[`threat-hunting/windows/powershell-lolbins/`](./threat-hunting/windows/powershell-lolbins/)
+
+The hunting model emphasizes:
+
+- hypothesis-driven hunts;
+- backend-specific queries;
+- evidence collection and pivots;
+- false-positive and blind-spot analysis;
+- Hunt → Detection promotion;
+- explicit assumptions rather than hidden tenant dependencies.
+
+## Validation Model
+
+| Capability | Evidence | Current quality level |
+| --- | --- | ---: |
+| Sigma rules | Sigma CLI / strict validation | Q2 |
+| YARA rules | native `yarac` compilation | Q2 |
+| Suricata rules | native `suricata -T` validation | Q2 |
+| Zeek scripts | native Zeek load validation | Q2 |
+| Snort 3 rules | native `snort -T` validation | Q2 |
+| Canonical Windows detection behavior | positive + negative synthetic fixtures | Q3 |
+| Threat-hunting content | structural/content validation | Q1 |
+| Vendor-specific SIEM/EDR queries | static/schema-aware review | Q1 |
+
+Reference authorities:
 
 - [Quality Model](./docs/quality-model.md)
 - [Engine Validation Matrix](./docs/engine-validation-matrix.md)
 - [Detection Engine & Language Registry](./docs/detection-engine-registry.md)
 - [Changelog](./CHANGELOG.md)
 
-## Validation Model
-
-| Capability | Current evidence | Quality level |
-| --- | --- | ---: |
-| Sigma rules | Sigma CLI / SigmaHQ strict validation | Q2 |
-| YARA rules | Native `yarac` compilation | Q2 |
-| Suricata rules | Native `suricata -T` validation | Q2 |
-| Zeek scripts | Native Zeek `8.0.9` script load validation | Q2 |
-| Snort 3 rules | Native Snort `3.12.2.0` `snort -T` validation | Q2 |
-| Canonical Windows detection behavior | Positive + negative synthetic fixtures | Q3 |
-| Threat-hunting content | Repository structural/content validation | Q1 |
-| Vendor-specific SIEM/EDR queries | Static/schema-aware review | Q1 |
-
-> **Quality gates are evidence, not universal deployment guarantees.** A passing repository check confirms the defined validation contract; it does not prove identical behavior across every customer tenant, sensor version, data model, or operating environment.
-
-## Detection & Hunting Coverage
-
-### Detection Packs
-
-- [Windows PowerShell & LOLBins Detection Pack v0.3](./detections/windows/powershell-lolbins/) — multi-engine defensive coverage across Sigma, Splunk SPL, Microsoft KQL, Microsoft Defender XDR Custom Detections, Elastic KQL/EQL/ES|QL/Query DSL, OpenSearch Query DSL, CrowdStrike Falcon LogScale CQL, SentinelOne STAR templates, Wazuh XML, Google SecOps YARA-L, YARA, Suricata, Snort 3, and Zeek where technically applicable.
-
-### Threat Hunting Packs
-
-- [Windows PowerShell & LOLBins Threat Hunting Engineering Pack v0.1](./threat-hunting/windows/powershell-lolbins/) — hypothesis-driven hunts with Splunk SPL, Microsoft KQL, Elastic KQL/EQL/ES|QL, OpenSearch Query DSL, CrowdStrike Falcon LogScale CQL, SentinelOne PowerQuery, Google SecOps YARA-L, investigation pivots, evidence collection, and Hunt → Detection feedback.
-
 ## Engineering Standard
 
-Every substantive defensive artifact should document, where applicable:
+A substantive defensive artifact should document, where applicable:
 
 1. objective and defensive use case;
-2. threat or ATT&CK context;
+2. threat / behavior / ATT&CK context;
 3. required telemetry and prerequisites;
-4. engine, platform, and rule/query language;
-5. detection, hunt, deception, or response logic;
-6. validation level and supporting evidence;
+4. engine, platform, data model, and query/rule language;
+5. detection, hunt, deception, response, or automation logic;
+6. validation level and evidence;
 7. expected false positives, blind spots, and limitations;
-8. production considerations and operational dependencies;
+8. performance and production considerations;
 9. rollback, disable, or recovery procedure;
 10. references, attribution, and version history.
 
-The repository uses explicit engine and language names. Ambiguous labels such as **KQL** by itself are avoided because Microsoft Kusto Query Language, Elastic KQL, and other query dialects are not interchangeable.
-
-## Defensive Engineering Lifecycle
-
-```text
-Design → Review → Test → Validate → Deploy → Measure → Tune → Retire
-```
-
-The lifecycle is evidence-driven. A syntactically valid rule is not automatically behaviorally validated, and a behaviorally validated rule is not automatically production-approved for every environment.
+Backend identity must be explicit. Labels such as **KQL** alone are avoided because Microsoft Kusto Query Language, Elastic KQL, and other query dialects are not interchangeable.
 
 ## Enterprise Use Cases
 
-DefenseOps is intended to support use cases such as:
+DefenseOps is designed to support:
 
-- enterprise Detection-as-Code programs;
-- threat-hunting engineering and hypothesis libraries;
+- Detection-as-Code programs;
+- threat-hunting engineering libraries;
 - SIEM/EDR migration and query-portability work;
-- purple-team detection validation;
+- purple-team validation;
 - incident-driven detection improvement;
-- DFIR-to-detection feedback loops;
-- control validation and defensive regression testing;
-- security automation that requires traceable, governed engineering inputs;
-- SOC engineering standardization across multiple teams or business units.
+- DFIR → Detection feedback;
+- defensive regression testing;
+- control validation;
+- traceable security automation;
+- SOC engineering standardization across teams or business units.
 
-## Security, Safety & Deployment Boundaries
+## Production Boundary
 
-This repository is intended for **authorized defensive security engineering, controlled validation, incident response, threat hunting, and security research**.
+Before deployment, validate at minimum:
 
-Before production deployment:
+- telemetry availability and field mappings;
+- platform and engine versions;
+- positive and negative behavior;
+- false-positive and performance impact;
+- permissions and execution context;
+- rollback / disable procedures;
+- normal organizational change control.
 
-- validate telemetry availability and field mappings;
-- review engine and platform versions;
-- test expected positive and negative behavior;
-- estimate false-positive and performance impact;
-- define rollback or disable procedures;
-- use normal organizational change control.
-
-Repository content is not automatic authorization to make production changes.
+Repository content is not automatic authorization to change production state.
 
 ## Cyber-Sentinel Ecosystem
 
-Cyber-Sentinel uses three contract-separated product layers:
-
 ```text
-Cyber-Sentinel
-├── ATLAS       — KNOW   → Connect • Search • Investigate • Explain
-├── DefenseOps  — DEFEND → Detect • Hunt • Validate • Respond • Automate
-└── Skills      — APPLY  → Execute • Review • Reuse • Govern
+ATLAS       — KNOW   → Connect • Search • Investigate • Explain
+DefenseOps  — DEFEND → Detect • Hunt • Validate • Respond • Automate
+Skills      — APPLY  → Execute • Review • Reuse • Govern
 ```
-
-## Approved ATLAS Delivery Family
-
-The wider Cyber-Sentinel ecosystem now treats the following ATLAS surfaces as approved delivery scope:
-
-```text
-ATLAS
-├── Desktop: Windows / Linux / macOS
-├── CLI: Windows / Linux / macOS
-├── Web
-├── PWA: iOS Safari
-├── API
-└── Mobile: iOS / Android
-```
-
-Only Windows Desktop is currently engineering-ready. The other surfaces remain future deliverables and must preserve the same canonical, provenance, trust, and release boundaries. Desktop and Android browser access are covered by the normal Web surface; iOS Safari is the dedicated PWA target.
 
 ### ATLAS — KNOW
 
-[Cyber-Sentinel-Atlas](https://github.com/cyber-sentinel/Cyber-Sentinel-Atlas) owns governed cyber-defense knowledge, canonical relationships, deterministic retrieval, provenance, investigation context, verified offline knowledge delivery, and analyst-facing product interfaces.
+[Cyber-Sentinel ATLAS](https://github.com/cyber-sentinel/Cyber-Sentinel-Atlas) owns canonical cyber-defense knowledge, provenance, deterministic retrieval, investigation context, graph relationships, and verified offline knowledge delivery.
 
-DefenseOps may provide controlled defensive engineering content to ATLAS, but repository origin never grants canonical authority. ATLAS applies its own ingestion, provenance, validation, trust, and release boundaries.
-
-### DefenseOps — DEFEND
-
-DefenseOps owns the engineering artifacts used to detect, hunt, validate, respond, automate, and continuously improve defensive controls.
+DefenseOps content may be promoted into ATLAS only through ATLAS source, provenance, validation, and trust boundaries. Repository origin alone never grants canonical authority.
 
 ### Skills — APPLY
 
-[Cyber-Sentinel-Skills](https://github.com/cyber-sentinel/Cyber-Sentinel-Skills) owns reusable operating procedures and playbooks for consistent execution by humans and, where appropriate, AI-assisted workflows.
+[Cyber-Sentinel Skills](https://github.com/cyber-sentinel/Cyber-Sentinel-Skills) owns reusable operating procedures and governed playbooks. Skills may operationalize DefenseOps artifacts, but it does not silently redefine their engineering ownership or validation state.
 
-Skills may operationalize DefenseOps content, but it does not replace or silently redefine the detection, hunt, validation, or response engineering owned here.
+## Product Maturity
 
-## Product & Commercial Maturity
+The current `0.1.0` engineering baseline is inspectable and CI-backed, but:
 
-DefenseOps is positioned as a **public, inspectable defensive-engineering product repository**, not as a claim of universal production certification.
+- no GitHub Release/tag is currently published for the baseline;
+- tenant-specific validation remains environment-dependent;
+- vendor-native behavior may require compatible runtime/tenant verification;
+- no project `LICENSE` is currently published;
+- public visibility does not itself grant redistribution rights;
+- release packaging must preserve evidence, compatibility, attribution, and rollback metadata.
 
-Current maturity boundaries are explicit:
-
-- stable engineering baseline `0.1.0` is documented and CI-backed;
-- no GitHub Release/tag is currently published for that baseline;
-- tenant-specific production validation remains environment-dependent;
-- vendor-native behavior may require compatible runtime or tenant validation;
-- no project license is currently published;
-- public visibility does not grant redistribution or commercial incorporation rights;
-- future release packaging should preserve evidence, attribution, compatibility, and rollback metadata.
-
-This conservative maturity model is intentional. In cyber defense, product credibility should follow evidence rather than marketing labels.
+This maturity model is intentional: **credibility follows evidence, not labels**.
 
 ## Product Direction
 
-The near-term direction is to expand evidence-backed defensive engineering while preserving clear separation between:
+Near-term engineering priorities remain:
 
-- portable defensive logic;
-- engine-specific implementation;
-- validation maturity;
-- production readiness;
-- reusable operating-procedure ownership.
-
-The objective is a defensible engineering system that can support enterprise security operations without hiding assumptions behind vendor-specific syntax or undocumented analyst knowledge.
+- broaden behaviorally validated multi-engine detections;
+- deepen Hunt → Detection → Validation feedback;
+- strengthen reusable DFIR/IR and response engineering;
+- improve compatibility and telemetry requirement metadata;
+- expand validation maturity without overstating production readiness;
+- preserve clean integration contracts with ATLAS and Skills.
 
 ---
 
-**Maintainer:** Ali RahimDabagh
-
-**Ecosystem role:** `DEFEND`
-
-**Focus:** Cyber Defense Architecture • Detection Engineering • Threat Hunting • DFIR/IR • Defensive Validation • Security Automation
+<p align="center"><strong>Cyber-Sentinel DefenseOps — DEFEND with evidence.</strong></p>
+<p align="center"><sub>Maintained by Ali RahimDabagh</sub></p>
