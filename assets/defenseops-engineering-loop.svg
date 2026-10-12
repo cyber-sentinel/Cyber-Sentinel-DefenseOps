@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 720" role="img" aria-labelledby="title desc">
+  <title id="title">DefenseOps engineering lifecycle</title>
+  <desc id="desc">A closed defensive engineering loop from behavior and telemetry to detection, hunting, validation, deployment, measurement, tuning, and retirement.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16090d"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dc2626"/><stop offset="1" stop-color="#fb7185"/></linearGradient>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#fb7185"/></marker>
+  </defs>
+  <rect width="1500" height="720" rx="30" fill="url(#bg)"/>
+  <text x="750" y="70" text-anchor="middle" fill="#f8fafc" font-family="Segoe UI,Arial,sans-serif" font-size="34" font-weight="700">DefenseOps Engineering Lifecycle</text>
+  <text x="750" y="106" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI,Arial,sans-serif" font-size="16">Defensive content is engineered, validated, measured, tuned, and retired — not merely collected.</text>
+
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="15">
+    <g transform="translate(95 210)"><rect width="180" height="116" rx="20" fill="#1f1317" stroke="#7f1d1d"/><text x="90" y="45" text-anchor="middle" fill="#fecdd3" font-weight="700">Behavior</text><text x="90" y="70" text-anchor="middle" fill="#fecdd3" font-weight="700">+ Telemetry Need</text><text x="90" y="94" text-anchor="middle" fill="#94a3b8" font-size="12">What must be seen?</text></g>
+    <g transform="translate(325 210)"><rect width="180" height="116" rx="20" fill="#1f1317" stroke="#ef4444"/><text x="90" y="45" text-anchor="middle" fill="#f8fafc" font-weight="700">Detection</text><text x="90" y="70" text-anchor="middle" fill="#f8fafc" font-weight="700">Design</text><text x="90" y="94" text-anchor="middle" fill="#94a3b8" font-size="12">Logic • fields • backend</text></g>
+    <g transform="translate(555 210)"><rect width="180" height="116" rx="20" fill="#1f1317" stroke="#ef4444"/><text x="90" y="45" text-anchor="middle" fill="#f8fafc" font-weight="700">Threat Hunt</text><text x="90" y="70" text-anchor="middle" fill="#f8fafc" font-weight="700">Hypothesis</text><text x="90" y="94" text-anchor="middle" fill="#94a3b8" font-size="12">Pivots • evidence • scope</text></g>
+    <g transform="translate(785 210)"><rect width="180" height="116" rx="20" fill="#18241f" stroke="#14b8a6"/><text x="90" y="45" text-anchor="middle" fill="#ccfbf1" font-weight="700">Validation</text><text x="90" y="70" text-anchor="middle" fill="#ccfbf1" font-weight="700">Evidence</text><text x="90" y="94" text-anchor="middle" fill="#94a3b8" font-size="12">Positive • negative • native</text></g>
+    <g transform="translate(1015 210)"><rect width="180" height="116" rx="20" fill="#1f1317" stroke="#ef4444"/><text x="90" y="45" text-anchor="middle" fill="#f8fafc" font-weight="700">Controlled</text><text x="90" y="70" text-anchor="middle" fill="#f8fafc" font-weight="700">Deployment</text><text x="90" y="94" text-anchor="middle" fill="#94a3b8" font-size="12">Dependencies • rollback</text></g>
+    <g transform="translate(1245 210)"><rect width="160" height="116" rx="20" fill="#1f1317" stroke="#ef4444"/><text x="80" y="45" text-anchor="middle" fill="#f8fafc" font-weight="700">Measure</text><text x="80" y="70" text-anchor="middle" fill="#f8fafc" font-weight="700">&amp; Operate</text><text x="80" y="94" text-anchor="middle" fill="#94a3b8" font-size="12">Signal • noise • drift</text></g>
+  </g>
+
+  <g stroke="#fb7185" stroke-width="4" marker-end="url(#a)"><path d="M275 268 H317"/><path d="M505 268 H547"/><path d="M735 268 H777"/><path d="M965 268 H1007"/><path d="M1195 268 H1237"/></g>
+
+  <path d="M1325 326 C1325 500 1120 570 750 570 C380 570 175 500 175 345" fill="none" stroke="#fb7185" stroke-width="4" stroke-dasharray="10 10" marker-end="url(#a)"/>
+  <text x="750" y="546" text-anchor="middle" fill="#fb7185" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700">TUNE • IMPROVE • RETIRE • FEED BACK</text>
+
+  <rect x="250" y="404" width="1000" height="92" rx="24" fill="#0f172a" stroke="#334155"/>
+  <text x="750" y="438" text-anchor="middle" fill="#e2e8f0" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="700">Validation maturity is explicit</text>
+  <text x="750" y="470" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI,Arial,sans-serif" font-size="14">Syntax-valid ≠ telemetry-valid ≠ engine-valid ≠ behavior-validated ≠ production-authorized</text>
+
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="13">
+    <rect x="325" y="625" width="200" height="42" rx="14" fill="#2b1117" stroke="#7f1d1d"/><text x="425" y="651" text-anchor="middle" fill="#fecdd3">Detection Engineering</text>
+    <rect x="545" y="625" width="180" height="42" rx="14" fill="#2b1117" stroke="#7f1d1d"/><text x="635" y="651" text-anchor="middle" fill="#fecdd3">Threat Hunting</text>
+    <rect x="745" y="625" width="160" height="42" rx="14" fill="#2b1117" stroke="#7f1d1d"/><text x="825" y="651" text-anchor="middle" fill="#fecdd3">DFIR / IR</text>
+    <rect x="925" y="625" width="250" height="42" rx="14" fill="#2b1117" stroke="#7f1d1d"/><text x="1050" y="651" text-anchor="middle" fill="#fecdd3">Response &amp; Automation</text>
+  </g>
+</svg>
