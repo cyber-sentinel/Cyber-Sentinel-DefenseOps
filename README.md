@@ -46,26 +46,9 @@ DefenseOps does **not** own ATLAS canonical knowledge or Skills operational-proc
 
 ## Engineering Lifecycle
 
-```text
-Threat / Behavior / Defensive Need
-              ↓
-           Design
-              ↓
-           Review
-              ↓
-            Test
-              ↓
-          Validate
-              ↓
-           Deploy
-              ↓
-          Measure
-              ↓
-            Tune
-              ↓
-           Retire
-              ↺
-```
+<p align="center">
+  <img src="assets/defenseops-engineering-loop.svg" alt="DefenseOps engineering lifecycle from behavior and telemetry needs through detection, hunting, validation, deployment, measurement, tuning, and retirement" width="100%" />
+</p>
 
 The lifecycle is evidence-driven. Syntactic validity, behavioral validation, and production approval are separate states.
 
