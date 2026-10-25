@@ -30,6 +30,15 @@ DefenseOps is deliberately not a rule dump. Defensive content is treated as an e
 
 A passing CI check is evidence that a defined repository contract passed. It is **not** automatic authorization to deploy content into every tenant, sensor, endpoint, or production environment.
 
+## Engineering Review Snapshot — 2026-10-25
+
+The public `main` remains the `0.1.0` repository engineering baseline; that is **not** a product release or a blanket approval to run provider jobs.
+
+- [Governed agent-instructions Draft PR #13](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/pull/13), exact head `83e9cfd1bb06766be40f6bd51a3da9bb9e91b5ff`, proposes the project-owned `AGENTS.md`. [Repository Hygiene run #39992078480](https://github.com/cyber-sentinel/Cyber-Sentinel-DefenseOps/actions/runs/39992078480) succeeded at that head.
+- The committed `main` baseline does **not yet contain** this proposed `AGENTS.md`; do not treat an untracked overlay as an approved repository trust binding. Even after an owner-authorized merge, any consuming system must verify the *new* exact trusted base and bundle before accepting project-specific execution.
+- Detection/hunt content validation, real vendor-engine behavior, site telemetry mapping and Production execution approval remain distinct. A green Repository Hygiene workflow does **not** close these gates.
+- Multi-project Orchestrator execution is managed through a separate, private control boundary; this public product repository does not authorize job dispatch, privilege delegation or Production canaries.
+
 ## What DefenseOps Owns
 
 | Domain | Engineering responsibility |
@@ -147,6 +156,7 @@ Repository content is not automatic authorization to change production state.
 ATLAS       — KNOW   → Connect • Search • Investigate • Explain
 DefenseOps  — DEFEND → Detect • Hunt • Validate • Respond • Automate
 Skills      — APPLY  → Execute • Review • Reuse • Govern
+AION        — INTERACT → Visualize • Listen • Speak • Adapt
 ```
 
 ### ATLAS — KNOW
@@ -158,6 +168,10 @@ DefenseOps content may be promoted into ATLAS only through ATLAS source, provena
 ### Skills — APPLY
 
 [Cyber-Sentinel Skills](https://github.com/cyber-sentinel/Cyber-Sentinel-Skills) owns reusable operating procedures and governed playbooks. Skills may operationalize DefenseOps artifacts, but it does not silently redefine their engineering ownership or validation state.
+
+### AION — INTERACT
+
+[Cyber-Sentinel AION](https://github.com/cyber-sentinel/Cyber-Sentinel-AION) provides the bounded visual and bilingual interaction layer. It cannot grant detection deployment authority or rewrite DefenseOps evidence; product-specific results stay with the owning defensive engine.
 
 ## Product Maturity
 
